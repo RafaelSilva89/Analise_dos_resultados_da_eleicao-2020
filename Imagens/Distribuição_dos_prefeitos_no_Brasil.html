@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_796a6c5a6655a50fd31d5a889b1e1138 {
+                    position: relative;
+                    width: 700.0px;
+                    height: 800.0px;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_796a6c5a6655a50fd31d5a889b1e1138" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_796a6c5a6655a50fd31d5a889b1e1138 = L.map(
+                "map_796a6c5a6655a50fd31d5a889b1e1138",
+                {
+                    center: [-23.5489, -46.6388],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 4,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_5a218929c2df402145f0f81f9fdcf4cb = L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "Data by \u0026copy; \u003ca target=\"_blank\" href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca target=\"_blank\" href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_796a6c5a6655a50fd31d5a889b1e1138);
+        
+    
+            var marker_c1b21c907bafcadc86367b416a7c4d35 = L.marker(
+                [-9.971, -67.81],
+                {}
+            ).addTo(map_796a6c5a6655a50fd31d5a889b1e1138);
+        
+    
+            var icon_abdf16af59a387ad22821fd4f1815f8d = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_c1b21c907bafcadc86367b416a7c4d35.setIcon(icon_abdf16af59a387ad22821fd4f1815f8d);
+        
+    
+            marker_c1b21c907bafcadc86367b416a7c4d35.bindTooltip(
+                `<div>
+                     Na região Norte foram eleitos 23 prefeitos eleitos em Rio Branco
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_111a3a812ea3a10c4cafae172e925589 = L.marker(
+                [-9.666, -35.735],
+                {}
+            ).addTo(map_796a6c5a6655a50fd31d5a889b1e1138);
+        
+    
+            var icon_7bf70de308ef2d57dff7bd87cc860808 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "purble", "prefix": "glyphicon"}
+            );
+            marker_111a3a812ea3a10c4cafae172e925589.setIcon(icon_7bf70de308ef2d57dff7bd87cc860808);
+        
+    
+            marker_111a3a812ea3a10c4cafae172e925589.bindTooltip(
+                `<div>
+                     Na região Nordeste foram eleitos 101 prefeitos eleitos em Maceió
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_9220b5c6fb74263888d67e1adf8320b4 = L.marker(
+                [-3.119, -60.021],
+                {}
+            ).addTo(map_796a6c5a6655a50fd31d5a889b1e1138);
+        
+    
+            var icon_4c72beb5c0ccf48d9d005dd24c1fdf06 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_9220b5c6fb74263888d67e1adf8320b4.setIcon(icon_4c72beb5c0ccf48d9d005dd24c1fdf06);
+        
+    
+            marker_9220b5c6fb74263888d67e1adf8320b4.bindTooltip(
+                `<div>
+                     Na região Norte foram eleitos 62 prefeitos eleitos em Manaus
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_53534cf6b9af2e42575c2bae2f1d8e64 = L.marker(
+                [0.034, -51.066],
+                {}
+            ).addTo(map_796a6c5a6655a50fd31d5a889b1e1138);
+        
+    
+            var icon_a8c0726e26546ca4cf680b9c8dbb5ae5 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_53534cf6b9af2e42575c2bae2f1d8e64.setIcon(icon_a8c0726e26546ca4cf680b9c8dbb5ae5);
+        
+    
+            marker_53534cf6b9af2e42575c2bae2f1d8e64.bindTooltip(
+                `<div>
+                     Na região Norte foram eleitos 14 prefeitos eleitos em Macapá
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_831edde5a1b58a405abe5c0ec32dd0f0 = L.marker(
+                [-12.971, -38.51],
+                {}
+            ).addTo(map_796a6c5a6655a50fd31d5a889b1e1138);
+        
+    
+            var icon_6d40dd6b945ab05692d77b2e0082d135 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "purble", "prefix": "glyphicon"}
+            );
+            marker_831edde5a1b58a405abe5c0ec32dd0f0.setIcon(icon_6d40dd6b945ab05692d77b2e0082d135);
+        
+    
+            marker_831edde5a1b58a405abe5c0ec32dd0f0.bindTooltip(
+                `<div>
+                     Na região Nordeste foram eleitos 415 prefeitos eleitos em Salvador
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_a584773a688481bf3a7a7e714e40c8a1 = L.marker(
+                [-3.731, -38.526],
+                {}
+            ).addTo(map_796a6c5a6655a50fd31d5a889b1e1138);
+        
+    
+            var icon_65352314d90d59cb880787d7cffc3183 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "purble", "prefix": "glyphicon"}
+            );
+            marker_a584773a688481bf3a7a7e714e40c8a1.setIcon(icon_65352314d90d59cb880787d7cffc3183);
+        
+    
+            marker_a584773a688481bf3a7a7e714e40c8a1.bindTooltip(
+                `<div>
+                     Na região Nordeste foram eleitos 181 prefeitos eleitos em Fortaleza
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_7b0bc7cb7da6dbb59fd29b8b01ea98a3 = L.marker(
+                [-20.32, -40.337],
+                {}
+            ).addTo(map_796a6c5a6655a50fd31d5a889b1e1138);
+        
+    
+            var icon_52abb2d0756f15352069ce51c8939d80 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "cadetblue", "prefix": "glyphicon"}
+            );
+            marker_7b0bc7cb7da6dbb59fd29b8b01ea98a3.setIcon(icon_52abb2d0756f15352069ce51c8939d80);
+        
+    
+            marker_7b0bc7cb7da6dbb59fd29b8b01ea98a3.bindTooltip(
+                `<div>
+                     Na região Sudeste foram eleitos 81 prefeitos eleitos em Vitória
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_a2ce581e963d537ca8d1d0d79985102a = L.marker(
+                [-16.679, -49.255],
+                {}
+            ).addTo(map_796a6c5a6655a50fd31d5a889b1e1138);
+        
+    
+            var icon_8ffd05753a45e71ee362bd58df369074 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "lightred", "prefix": "glyphicon"}
+            );
+            marker_a2ce581e963d537ca8d1d0d79985102a.setIcon(icon_8ffd05753a45e71ee362bd58df369074);
+        
+    
+            marker_a2ce581e963d537ca8d1d0d79985102a.bindTooltip(
+                `<div>
+                     Na região Centro-Oeste foram eleitos 246 prefeitos eleitos em Goiânia
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_0e29b32c53996431c942fae44be675cb = L.marker(
+                [-2.532, -44.302],
+                {}
+            ).addTo(map_796a6c5a6655a50fd31d5a889b1e1138);
+        
+    
+            var icon_28d680c6c483e71c2ad3758274f9c8f7 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "purble", "prefix": "glyphicon"}
+            );
+            marker_0e29b32c53996431c942fae44be675cb.setIcon(icon_28d680c6c483e71c2ad3758274f9c8f7);
+        
+    
+            marker_0e29b32c53996431c942fae44be675cb.bindTooltip(
+                `<div>
+                     Na região Nordeste foram eleitos 215 prefeitos eleitos em São Luís
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_1ce65fadfec65d4790e8488980d68ecb = L.marker(
+                [-19.916, -43.934],
+                {}
+            ).addTo(map_796a6c5a6655a50fd31d5a889b1e1138);
+        
+    
+            var icon_2a2d1d2c8afa4e3545020e10329d28d7 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "cadetblue", "prefix": "glyphicon"}
+            );
+            marker_1ce65fadfec65d4790e8488980d68ecb.setIcon(icon_2a2d1d2c8afa4e3545020e10329d28d7);
+        
+    
+            marker_1ce65fadfec65d4790e8488980d68ecb.bindTooltip(
+                `<div>
+                     Na região Sudeste foram eleitos 847 prefeitos eleitos em Belo Horizonte
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_ee2a84e97041c58cda712938c86a80c4 = L.marker(
+                [-20.443, -54.647],
+                {}
+            ).addTo(map_796a6c5a6655a50fd31d5a889b1e1138);
+        
+    
+            var icon_229a796ed4c65efa22144c6229cf6876 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "lightred", "prefix": "glyphicon"}
+            );
+            marker_ee2a84e97041c58cda712938c86a80c4.setIcon(icon_229a796ed4c65efa22144c6229cf6876);
+        
+    
+            marker_ee2a84e97041c58cda712938c86a80c4.bindTooltip(
+                `<div>
+                     Na região Centro-Oeste foram eleitos 75 prefeitos eleitos em Campo Grande
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_e2a69195d4b1e740e584ab231a87c1db = L.marker(
+                [-15.598, -56.096],
+                {}
+            ).addTo(map_796a6c5a6655a50fd31d5a889b1e1138);
+        
+    
+            var icon_d75de51864fa57d993c634dcd3aa2caf = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "lightred", "prefix": "glyphicon"}
+            );
+            marker_e2a69195d4b1e740e584ab231a87c1db.setIcon(icon_d75de51864fa57d993c634dcd3aa2caf);
+        
+    
+            marker_e2a69195d4b1e740e584ab231a87c1db.bindTooltip(
+                `<div>
+                     Na região Centro-Oeste foram eleitos 141 prefeitos eleitos em Cuiabá
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_56148153626a89a94fd398367ead3cdf = L.marker(
+                [-1.455, -48.503],
+                {}
+            ).addTo(map_796a6c5a6655a50fd31d5a889b1e1138);
+        
+    
+            var icon_a2ba15bf03918476d5ffbfb6c617dea7 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_56148153626a89a94fd398367ead3cdf.setIcon(icon_a2ba15bf03918476d5ffbfb6c617dea7);
+        
+    
+            marker_56148153626a89a94fd398367ead3cdf.bindTooltip(
+                `<div>
+                     Na região Norte foram eleitos 139 prefeitos eleitos em Belém
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_6f8517a8eb71962332f38eacd277f5f9 = L.marker(
+                [-7.119, -34.845],
+                {}
+            ).addTo(map_796a6c5a6655a50fd31d5a889b1e1138);
+        
+    
+            var icon_1f764a319b77aa042158179d2019f11c = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "purble", "prefix": "glyphicon"}
+            );
+            marker_6f8517a8eb71962332f38eacd277f5f9.setIcon(icon_1f764a319b77aa042158179d2019f11c);
+        
+    
+            marker_6f8517a8eb71962332f38eacd277f5f9.bindTooltip(
+                `<div>
+                     Na região Nordeste foram eleitos 220 prefeitos eleitos em João Pessoa
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_16b32d65ce3393186d111bc07b1628d3 = L.marker(
+                [-8.064, -34.878],
+                {}
+            ).addTo(map_796a6c5a6655a50fd31d5a889b1e1138);
+        
+    
+            var icon_792d6bb8a43453bc5682ef0a5afb04fd = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "purble", "prefix": "glyphicon"}
+            );
+            marker_16b32d65ce3393186d111bc07b1628d3.setIcon(icon_792d6bb8a43453bc5682ef0a5afb04fd);
+        
+    
+            marker_16b32d65ce3393186d111bc07b1628d3.bindTooltip(
+                `<div>
+                     Na região Nordeste foram eleitos 180 prefeitos eleitos em Recife
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_2c51519ffabe74bc5f754d79a6e031f2 = L.marker(
+                [-5.089, -42.801],
+                {}
+            ).addTo(map_796a6c5a6655a50fd31d5a889b1e1138);
+        
+    
+            var icon_c32684c9b7e8746e5f0e46ed5d4b5d98 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "purble", "prefix": "glyphicon"}
+            );
+            marker_2c51519ffabe74bc5f754d79a6e031f2.setIcon(icon_c32684c9b7e8746e5f0e46ed5d4b5d98);
+        
+    
+            marker_2c51519ffabe74bc5f754d79a6e031f2.bindTooltip(
+                `<div>
+                     Na região Nordeste foram eleitos 223 prefeitos eleitos em Teresina
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_bad07df8355e0ef7dd1233be048f8f5e = L.marker(
+                [-25.429, -49.271],
+                {}
+            ).addTo(map_796a6c5a6655a50fd31d5a889b1e1138);
+        
+    
+            var icon_eabaa7e4671eeea019b775606daca3a0 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "orange", "prefix": "glyphicon"}
+            );
+            marker_bad07df8355e0ef7dd1233be048f8f5e.setIcon(icon_eabaa7e4671eeea019b775606daca3a0);
+        
+    
+            marker_bad07df8355e0ef7dd1233be048f8f5e.bindTooltip(
+                `<div>
+                     Na região Sul foram eleitos 390 prefeitos eleitos em Curitiba
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_927b454feac8ab67cc5381261a236522 = L.marker(
+                [-22.903, -43.209],
+                {}
+            ).addTo(map_796a6c5a6655a50fd31d5a889b1e1138);
+        
+    
+            var icon_b9bbba9e00782e6b24c3e0382dd36246 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "cadetblue", "prefix": "glyphicon"}
+            );
+            marker_927b454feac8ab67cc5381261a236522.setIcon(icon_b9bbba9e00782e6b24c3e0382dd36246);
+        
+    
+            marker_927b454feac8ab67cc5381261a236522.bindTooltip(
+                `<div>
+                     Na região Sudeste foram eleitos 90 prefeitos eleitos em Rio de Janeiro
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_989c490f65057078288dd059e4d03509 = L.marker(
+                [-5.794, -35.211],
+                {}
+            ).addTo(map_796a6c5a6655a50fd31d5a889b1e1138);
+        
+    
+            var icon_545f2c2b91bc88f1be432fb4d6d41483 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "purble", "prefix": "glyphicon"}
+            );
+            marker_989c490f65057078288dd059e4d03509.setIcon(icon_545f2c2b91bc88f1be432fb4d6d41483);
+        
+    
+            marker_989c490f65057078288dd059e4d03509.bindTooltip(
+                `<div>
+                     Na região Nordeste foram eleitos 165 prefeitos eleitos em Natal
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_d9a0ef3db0200f88eb80a74c0a832f71 = L.marker(
+                [-8.76, -63.903],
+                {}
+            ).addTo(map_796a6c5a6655a50fd31d5a889b1e1138);
+        
+    
+            var icon_90a7ab51a30718fb6235b2f76fe16537 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_d9a0ef3db0200f88eb80a74c0a832f71.setIcon(icon_90a7ab51a30718fb6235b2f76fe16537);
+        
+    
+            marker_d9a0ef3db0200f88eb80a74c0a832f71.bindTooltip(
+                `<div>
+                     Na região Norte foram eleitos 53 prefeitos eleitos em Porto Velho
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_d85476f814e06977e0c049acb17d9b03 = L.marker(
+                [2.823, -60.675],
+                {}
+            ).addTo(map_796a6c5a6655a50fd31d5a889b1e1138);
+        
+    
+            var icon_61ae7d71c344f008c732431a6a1a32f5 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_d85476f814e06977e0c049acb17d9b03.setIcon(icon_61ae7d71c344f008c732431a6a1a32f5);
+        
+    
+            marker_d85476f814e06977e0c049acb17d9b03.bindTooltip(
+                `<div>
+                     Na região Norte foram eleitos 16 prefeitos eleitos em Boa Vista
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_6b658c6631b026c42c3bc0d589adfda5 = L.marker(
+                [-30.027, -51.228],
+                {}
+            ).addTo(map_796a6c5a6655a50fd31d5a889b1e1138);
+        
+    
+            var icon_8b5b07cec59ca0cc57fe399bc6248ccb = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "orange", "prefix": "glyphicon"}
+            );
+            marker_6b658c6631b026c42c3bc0d589adfda5.setIcon(icon_8b5b07cec59ca0cc57fe399bc6248ccb);
+        
+    
+            marker_6b658c6631b026c42c3bc0d589adfda5.bindTooltip(
+                `<div>
+                     Na região Sul foram eleitos 497 prefeitos eleitos em Porto Alegre
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_38f0860a760c88a00114f9236a5b372b = L.marker(
+                [-27.594, -48.548],
+                {}
+            ).addTo(map_796a6c5a6655a50fd31d5a889b1e1138);
+        
+    
+            var icon_20acd3b1a4ac3f06dadbecf690bf680a = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "orange", "prefix": "glyphicon"}
+            );
+            marker_38f0860a760c88a00114f9236a5b372b.setIcon(icon_20acd3b1a4ac3f06dadbecf690bf680a);
+        
+    
+            marker_38f0860a760c88a00114f9236a5b372b.bindTooltip(
+                `<div>
+                     Na região Sul foram eleitos 294 prefeitos eleitos em Florianópolis
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_55f825f383436052fa74b7d0e78868c4 = L.marker(
+                [-10.912, -37.074],
+                {}
+            ).addTo(map_796a6c5a6655a50fd31d5a889b1e1138);
+        
+    
+            var icon_e59597437acf72f27b895d8e495ee353 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "purble", "prefix": "glyphicon"}
+            );
+            marker_55f825f383436052fa74b7d0e78868c4.setIcon(icon_e59597437acf72f27b895d8e495ee353);
+        
+    
+            marker_55f825f383436052fa74b7d0e78868c4.bindTooltip(
+                `<div>
+                     Na região Nordeste foram eleitos 76 prefeitos eleitos em Aracaju
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_d3c840536aadb0973d60a5c19fa94f2f = L.marker(
+                [-23.55, -46.633],
+                {}
+            ).addTo(map_796a6c5a6655a50fd31d5a889b1e1138);
+        
+    
+            var icon_0265e18f43c74de8d1b5f5e45b169a90 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "cadetblue", "prefix": "glyphicon"}
+            );
+            marker_d3c840536aadb0973d60a5c19fa94f2f.setIcon(icon_0265e18f43c74de8d1b5f5e45b169a90);
+        
+    
+            marker_d3c840536aadb0973d60a5c19fa94f2f.bindTooltip(
+                `<div>
+                     Na região Sudeste foram eleitos 636 prefeitos eleitos em São Paulo
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_acd777421f96a1b70bc9f74d0201b866 = L.marker(
+                [-10.241, -48.355],
+                {}
+            ).addTo(map_796a6c5a6655a50fd31d5a889b1e1138);
+        
+    
+            var icon_2aa530d30897cceb1015f10b94eb4b48 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_acd777421f96a1b70bc9f74d0201b866.setIcon(icon_2aa530d30897cceb1015f10b94eb4b48);
+        
+    
+            marker_acd777421f96a1b70bc9f74d0201b866.bindTooltip(
+                `<div>
+                     Na região Norte foram eleitos 139 prefeitos eleitos em Palmas
+                 </div>`,
+                {"sticky": true}
+            );
+        
+</script>
+</html>

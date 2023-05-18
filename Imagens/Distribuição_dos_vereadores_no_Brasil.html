@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_d1d4a952bdd793021b18e312d8c86f91 {
+                    position: relative;
+                    width: 700.0px;
+                    height: 800.0px;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_d1d4a952bdd793021b18e312d8c86f91" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_d1d4a952bdd793021b18e312d8c86f91 = L.map(
+                "map_d1d4a952bdd793021b18e312d8c86f91",
+                {
+                    center: [-23.5489, -46.6388],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 4,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_8250c362f77518860f4d113931a79984 = L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "Data by \u0026copy; \u003ca target=\"_blank\" href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca target=\"_blank\" href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_d1d4a952bdd793021b18e312d8c86f91);
+        
+    
+            var circle_marker_1b59f019574d8345be1c1643585d112d = L.circleMarker(
+                [-9.971, -67.81],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d81d1eff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_d1d4a952bdd793021b18e312d8c86f91);
+        
+    
+            circle_marker_1b59f019574d8345be1c1643585d112d.bindTooltip(
+                `<div>
+                     Na região Norte foram eleitos 231 vereadores eleitos em Rio Branco
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        var popup_a7fab3ca339b0e27560d5e3f5c581f1b = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_3c9fc924deaffda99586d6e78acbedda = $(`<div id="html_3c9fc924deaffda99586d6e78acbedda" style="width: 100.0%; height: 100.0%;">Na região Norte foram eleitos 231 vereadores eleitos em Rio Branco</div>`)[0];
+                popup_a7fab3ca339b0e27560d5e3f5c581f1b.setContent(html_3c9fc924deaffda99586d6e78acbedda);
+            
+        
+
+        circle_marker_1b59f019574d8345be1c1643585d112d.bindPopup(popup_a7fab3ca339b0e27560d5e3f5c581f1b)
+        ;
+
+        
+    
+    
+            var circle_marker_682ce8702baf4db929428dae585a3555 = L.circleMarker(
+                [-9.666, -35.735],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#e44b33ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_d1d4a952bdd793021b18e312d8c86f91);
+        
+    
+            circle_marker_682ce8702baf4db929428dae585a3555.bindTooltip(
+                `<div>
+                     Na região Nordeste foram eleitos 1086 vereadores eleitos em Maceió
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        var popup_2cafb58ca25fccb0292a8c8327cccaf3 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_039b2fc4fce8477860553f6885b51f21 = $(`<div id="html_039b2fc4fce8477860553f6885b51f21" style="width: 100.0%; height: 100.0%;">Na região Nordeste foram eleitos 1086 vereadores eleitos em Maceió</div>`)[0];
+                popup_2cafb58ca25fccb0292a8c8327cccaf3.setContent(html_039b2fc4fce8477860553f6885b51f21);
+            
+        
+
+        circle_marker_682ce8702baf4db929428dae585a3555.bindPopup(popup_2cafb58ca25fccb0292a8c8327cccaf3)
+        ;
+
+        
+    
+    
+            var circle_marker_427c89e3aa63995010863c6ef7885b29 = L.circleMarker(
+                [-3.119, -60.021],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#df382aff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_d1d4a952bdd793021b18e312d8c86f91);
+        
+    
+            circle_marker_427c89e3aa63995010863c6ef7885b29.bindTooltip(
+                `<div>
+                     Na região Norte foram eleitos 738 vereadores eleitos em Manaus
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        var popup_d14fe39979da986ce48be62665009cf1 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_2f40afa81eb8b936b5d5c45e582a376d = $(`<div id="html_2f40afa81eb8b936b5d5c45e582a376d" style="width: 100.0%; height: 100.0%;">Na região Norte foram eleitos 738 vereadores eleitos em Manaus</div>`)[0];
+                popup_d14fe39979da986ce48be62665009cf1.setContent(html_2f40afa81eb8b936b5d5c45e582a376d);
+            
+        
+
+        circle_marker_427c89e3aa63995010863c6ef7885b29.bindPopup(popup_d14fe39979da986ce48be62665009cf1)
+        ;
+
+        
+    
+    
+            var circle_marker_f4754b6b0793c0e6eeea30eb6b16b821 = L.circleMarker(
+                [0.034, -51.066],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d7191cff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_d1d4a952bdd793021b18e312d8c86f91);
+        
+    
+            circle_marker_f4754b6b0793c0e6eeea30eb6b16b821.bindTooltip(
+                `<div>
+                     Na região Norte foram eleitos 151 vereadores eleitos em Macapá
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        var popup_7a4f1cee5715002081cbae0b787f7823 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_d527e1845305c92f47f339fc1ce1100f = $(`<div id="html_d527e1845305c92f47f339fc1ce1100f" style="width: 100.0%; height: 100.0%;">Na região Norte foram eleitos 151 vereadores eleitos em Macapá</div>`)[0];
+                popup_7a4f1cee5715002081cbae0b787f7823.setContent(html_d527e1845305c92f47f339fc1ce1100f);
+            
+        
+
+        circle_marker_f4754b6b0793c0e6eeea30eb6b16b821.bindPopup(popup_7a4f1cee5715002081cbae0b787f7823)
+        ;
+
+        
+    
+    
+            var circle_marker_282fcf39705c08ae5aa8ebb1be0fa027 = L.circleMarker(
+                [-12.971, -38.51],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#cac9b6ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_d1d4a952bdd793021b18e312d8c86f91);
+        
+    
+            circle_marker_282fcf39705c08ae5aa8ebb1be0fa027.bindTooltip(
+                `<div>
+                     Na região Nordeste foram eleitos 4630 vereadores eleitos em Salvador
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        var popup_17723b3a87c5ae2a1ba77b75118c2b77 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_7df6459b493016a90c482724ba134be5 = $(`<div id="html_7df6459b493016a90c482724ba134be5" style="width: 100.0%; height: 100.0%;">Na região Nordeste foram eleitos 4630 vereadores eleitos em Salvador</div>`)[0];
+                popup_17723b3a87c5ae2a1ba77b75118c2b77.setContent(html_7df6459b493016a90c482724ba134be5);
+            
+        
+
+        circle_marker_282fcf39705c08ae5aa8ebb1be0fa027.bindPopup(popup_17723b3a87c5ae2a1ba77b75118c2b77)
+        ;
+
+        
+    
+    
+            var circle_marker_1be4d392ebbdb2ade64e16b0e7a61582 = L.circleMarker(
+                [-3.731, -38.526],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#f4874fff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_d1d4a952bdd793021b18e312d8c86f91);
+        
+    
+            circle_marker_1be4d392ebbdb2ade64e16b0e7a61582.bindTooltip(
+                `<div>
+                     Na região Nordeste foram eleitos 2192 vereadores eleitos em Fortaleza
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        var popup_289874cacde61a64daf60058d1a4c955 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_1e4d8bf2bb976c49ec09ca39f941706a = $(`<div id="html_1e4d8bf2bb976c49ec09ca39f941706a" style="width: 100.0%; height: 100.0%;">Na região Nordeste foram eleitos 2192 vereadores eleitos em Fortaleza</div>`)[0];
+                popup_289874cacde61a64daf60058d1a4c955.setContent(html_1e4d8bf2bb976c49ec09ca39f941706a);
+            
+        
+
+        circle_marker_1be4d392ebbdb2ade64e16b0e7a61582.bindPopup(popup_289874cacde61a64daf60058d1a4c955)
+        ;
+
+        
+    
+    
+            var circle_marker_1dd8a0f22307e1ef8e100401e00da227 = L.circleMarker(
+                [-20.32, -40.337],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#e13f2dff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_d1d4a952bdd793021b18e312d8c86f91);
+        
+    
+            circle_marker_1dd8a0f22307e1ef8e100401e00da227.bindTooltip(
+                `<div>
+                     Na região Sudeste foram eleitos 860 vereadores eleitos em Vitória
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        var popup_adbef8382813799558013c0def197ebc = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_21a8af2976eb63f6652221675e09322e = $(`<div id="html_21a8af2976eb63f6652221675e09322e" style="width: 100.0%; height: 100.0%;">Na região Sudeste foram eleitos 860 vereadores eleitos em Vitória</div>`)[0];
+                popup_adbef8382813799558013c0def197ebc.setContent(html_21a8af2976eb63f6652221675e09322e);
+            
+        
+
+        circle_marker_1dd8a0f22307e1ef8e100401e00da227.bindPopup(popup_adbef8382813799558013c0def197ebc)
+        ;
+
+        
+    
+    
+            var circle_marker_cd0b2ed82ab621aeac52980f9fe9d681 = L.circleMarker(
+                [-16.679, -49.255],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#f79656ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_d1d4a952bdd793021b18e312d8c86f91);
+        
+    
+            circle_marker_cd0b2ed82ab621aeac52980f9fe9d681.bindTooltip(
+                `<div>
+                     Na região Centro-Oeste foram eleitos 2463 vereadores eleitos em Goiânia
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        var popup_e01a52ffd252d6869ff7bf73e7c88d94 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_82333a12b5da97a1789ec488e120d564 = $(`<div id="html_82333a12b5da97a1789ec488e120d564" style="width: 100.0%; height: 100.0%;">Na região Centro-Oeste foram eleitos 2463 vereadores eleitos em Goiânia</div>`)[0];
+                popup_e01a52ffd252d6869ff7bf73e7c88d94.setContent(html_82333a12b5da97a1789ec488e120d564);
+            
+        
+
+        circle_marker_cd0b2ed82ab621aeac52980f9fe9d681.bindPopup(popup_e01a52ffd252d6869ff7bf73e7c88d94)
+        ;
+
+        
+    
+    
+            var circle_marker_f612b492f769d4ecc19e30aad7e2f2ec = L.circleMarker(
+                [-2.532, -44.302],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#f79455ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_d1d4a952bdd793021b18e312d8c86f91);
+        
+    
+            circle_marker_f612b492f769d4ecc19e30aad7e2f2ec.bindTooltip(
+                `<div>
+                     Na região Nordeste foram eleitos 2427 vereadores eleitos em São Luís
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        var popup_196add3b0c2d2216449569022cc8261d = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_5411f05fedfe9013ae69b5a38e4afd5b = $(`<div id="html_5411f05fedfe9013ae69b5a38e4afd5b" style="width: 100.0%; height: 100.0%;">Na região Nordeste foram eleitos 2427 vereadores eleitos em São Luís</div>`)[0];
+                popup_196add3b0c2d2216449569022cc8261d.setContent(html_5411f05fedfe9013ae69b5a38e4afd5b);
+            
+        
+
+        circle_marker_f612b492f769d4ecc19e30aad7e2f2ec.bindPopup(popup_196add3b0c2d2216449569022cc8261d)
+        ;
+
+        
+    
+    
+            var circle_marker_42ee9720340a0a3c9dfdbb5a661b568e = L.circleMarker(
+                [-19.916, -43.934],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2c7bb6ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_d1d4a952bdd793021b18e312d8c86f91);
+        
+    
+            circle_marker_42ee9720340a0a3c9dfdbb5a661b568e.bindTooltip(
+                `<div>
+                     Na região Sudeste foram eleitos 8445 vereadores eleitos em Belo Horizonte
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        var popup_072f468c2962310b0ab9b7fb3e4eba21 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_8910666f556668d12dabff400af99d91 = $(`<div id="html_8910666f556668d12dabff400af99d91" style="width: 100.0%; height: 100.0%;">Na região Sudeste foram eleitos 8445 vereadores eleitos em Belo Horizonte</div>`)[0];
+                popup_072f468c2962310b0ab9b7fb3e4eba21.setContent(html_8910666f556668d12dabff400af99d91);
+            
+        
+
+        circle_marker_42ee9720340a0a3c9dfdbb5a661b568e.bindPopup(popup_072f468c2962310b0ab9b7fb3e4eba21)
+        ;
+
+        
+    
+    
+            var circle_marker_55a9551f3333f3fc78fcb0028d41cabc = L.circleMarker(
+                [-20.443, -54.647],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#e13e2dff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_d1d4a952bdd793021b18e312d8c86f91);
+        
+    
+            circle_marker_55a9551f3333f3fc78fcb0028d41cabc.bindTooltip(
+                `<div>
+                     Na região Centro-Oeste foram eleitos 847 vereadores eleitos em Campo Grande
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        var popup_c784ffb110a575715089dced39ef56c7 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_56d251aff61df45cc08d6e419eecfcdd = $(`<div id="html_56d251aff61df45cc08d6e419eecfcdd" style="width: 100.0%; height: 100.0%;">Na região Centro-Oeste foram eleitos 847 vereadores eleitos em Campo Grande</div>`)[0];
+                popup_c784ffb110a575715089dced39ef56c7.setContent(html_56d251aff61df45cc08d6e419eecfcdd);
+            
+        
+
+        circle_marker_55a9551f3333f3fc78fcb0028d41cabc.bindPopup(popup_c784ffb110a575715089dced39ef56c7)
+        ;
+
+        
+    
+    
+            var circle_marker_97145dfb94f723ac110078add5ce7206 = L.circleMarker(
+                [-15.598, -56.096],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#e95c3bff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_d1d4a952bdd793021b18e312d8c86f91);
+        
+    
+            circle_marker_97145dfb94f723ac110078add5ce7206.bindTooltip(
+                `<div>
+                     Na região Centro-Oeste foram eleitos 1395 vereadores eleitos em Cuiabá
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        var popup_1de8ef729200c36e0533c7bf2651d078 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_034599b7b3075b2e5eceb9d305430bcf = $(`<div id="html_034599b7b3075b2e5eceb9d305430bcf" style="width: 100.0%; height: 100.0%;">Na região Centro-Oeste foram eleitos 1395 vereadores eleitos em Cuiabá</div>`)[0];
+                popup_1de8ef729200c36e0533c7bf2651d078.setContent(html_034599b7b3075b2e5eceb9d305430bcf);
+            
+        
+
+        circle_marker_97145dfb94f723ac110078add5ce7206.bindPopup(popup_1de8ef729200c36e0533c7bf2651d078)
+        ;
+
+        
+    
+    
+            var circle_marker_94e7da3232d541292608fcdaa5b68241 = L.circleMarker(
+                [-1.455, -48.503],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ed6f44ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_d1d4a952bdd793021b18e312d8c86f91);
+        
+    
+            circle_marker_94e7da3232d541292608fcdaa5b68241.bindTooltip(
+                `<div>
+                     Na região Norte foram eleitos 1749 vereadores eleitos em Belém
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        var popup_05be2d5fc8ac260f40da00a992d331e9 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_139e07064f5ad76c0730c7605428a09f = $(`<div id="html_139e07064f5ad76c0730c7605428a09f" style="width: 100.0%; height: 100.0%;">Na região Norte foram eleitos 1749 vereadores eleitos em Belém</div>`)[0];
+                popup_05be2d5fc8ac260f40da00a992d331e9.setContent(html_139e07064f5ad76c0730c7605428a09f);
+            
+        
+
+        circle_marker_94e7da3232d541292608fcdaa5b68241.bindPopup(popup_05be2d5fc8ac260f40da00a992d331e9)
+        ;
+
+        
+    
+    
+            var circle_marker_95185b9e38984d418bc348411aaa35d6 = L.circleMarker(
+                [-7.119, -34.845],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#f3864eff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_d1d4a952bdd793021b18e312d8c86f91);
+        
+    
+            circle_marker_95185b9e38984d418bc348411aaa35d6.bindTooltip(
+                `<div>
+                     Na região Nordeste foram eleitos 2164 vereadores eleitos em João Pessoa
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        var popup_b87326457effccc3318caa7025c3fef3 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_51bc384950804c7d18ad7be3ae3c1381 = $(`<div id="html_51bc384950804c7d18ad7be3ae3c1381" style="width: 100.0%; height: 100.0%;">Na região Nordeste foram eleitos 2164 vereadores eleitos em João Pessoa</div>`)[0];
+                popup_b87326457effccc3318caa7025c3fef3.setContent(html_51bc384950804c7d18ad7be3ae3c1381);
+            
+        
+
+        circle_marker_95185b9e38984d418bc348411aaa35d6.bindPopup(popup_b87326457effccc3318caa7025c3fef3)
+        ;
+
+        
+    
+    
+            var circle_marker_75b60f8f815146e553f32afa50949779 = L.circleMarker(
+                [-8.064, -34.878],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#f2824cff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_d1d4a952bdd793021b18e312d8c86f91);
+        
+    
+            circle_marker_75b60f8f815146e553f32afa50949779.bindTooltip(
+                `<div>
+                     Na região Nordeste foram eleitos 2097 vereadores eleitos em Recife
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        var popup_a9d329603ddb5d1fe0d22141fa7db133 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_369adcd0e5d5305cd7f7bfd663d5ba68 = $(`<div id="html_369adcd0e5d5305cd7f7bfd663d5ba68" style="width: 100.0%; height: 100.0%;">Na região Nordeste foram eleitos 2097 vereadores eleitos em Recife</div>`)[0];
+                popup_a9d329603ddb5d1fe0d22141fa7db133.setContent(html_369adcd0e5d5305cd7f7bfd663d5ba68);
+            
+        
+
+        circle_marker_75b60f8f815146e553f32afa50949779.bindPopup(popup_a9d329603ddb5d1fe0d22141fa7db133)
+        ;
+
+        
+    
+    
+            var circle_marker_a67fd4e867f7de0353af4b0466b2255a = L.circleMarker(
+                [-5.089, -42.801],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#f3844eff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_d1d4a952bdd793021b18e312d8c86f91);
+        
+    
+            circle_marker_a67fd4e867f7de0353af4b0466b2255a.bindTooltip(
+                `<div>
+                     Na região Nordeste foram eleitos 2144 vereadores eleitos em Teresina
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        var popup_d18b9ddb7bad7263ce69d73cecb3027a = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_8ca0600fa9ed6b4cedb48a1a189016c1 = $(`<div id="html_8ca0600fa9ed6b4cedb48a1a189016c1" style="width: 100.0%; height: 100.0%;">Na região Nordeste foram eleitos 2144 vereadores eleitos em Teresina</div>`)[0];
+                popup_d18b9ddb7bad7263ce69d73cecb3027a.setContent(html_8ca0600fa9ed6b4cedb48a1a189016c1);
+            
+        
+
+        circle_marker_a67fd4e867f7de0353af4b0466b2255a.bindPopup(popup_d18b9ddb7bad7263ce69d73cecb3027a)
+        ;
+
+        
+    
+    
+            var circle_marker_81a87f21df6d7f98613918fc5c0b3cc6 = L.circleMarker(
+                [-25.429, -49.271],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#e1bd90ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_d1d4a952bdd793021b18e312d8c86f91);
+        
+    
+            circle_marker_81a87f21df6d7f98613918fc5c0b3cc6.bindTooltip(
+                `<div>
+                     Na região Sul foram eleitos 3869 vereadores eleitos em Curitiba
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        var popup_5447d7faeb2f49972a3540aff24bae60 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_9a76fd50eaeb033436a19c72a07e1d8e = $(`<div id="html_9a76fd50eaeb033436a19c72a07e1d8e" style="width: 100.0%; height: 100.0%;">Na região Sul foram eleitos 3869 vereadores eleitos em Curitiba</div>`)[0];
+                popup_5447d7faeb2f49972a3540aff24bae60.setContent(html_9a76fd50eaeb033436a19c72a07e1d8e);
+            
+        
+
+        circle_marker_81a87f21df6d7f98613918fc5c0b3cc6.bindPopup(popup_5447d7faeb2f49972a3540aff24bae60)
+        ;
+
+        
+    
+    
+            var circle_marker_7daa79f4de08c3f3a128ec0aae154b7c = L.circleMarker(
+                [-22.903, -43.209],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#e65035ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_d1d4a952bdd793021b18e312d8c86f91);
+        
+    
+            circle_marker_7daa79f4de08c3f3a128ec0aae154b7c.bindTooltip(
+                `<div>
+                     Na região Sudeste foram eleitos 1184 vereadores eleitos em Rio de Janeiro
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        var popup_3cf905bab6cb3bea6e9e8b5855f095fd = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_87da3f8b7178e6b556d3557ae42b35cd = $(`<div id="html_87da3f8b7178e6b556d3557ae42b35cd" style="width: 100.0%; height: 100.0%;">Na região Sudeste foram eleitos 1184 vereadores eleitos em Rio de Janeiro</div>`)[0];
+                popup_3cf905bab6cb3bea6e9e8b5855f095fd.setContent(html_87da3f8b7178e6b556d3557ae42b35cd);
+            
+        
+
+        circle_marker_7daa79f4de08c3f3a128ec0aae154b7c.bindPopup(popup_3cf905bab6cb3bea6e9e8b5855f095fd)
+        ;
+
+        
+    
+    
+            var circle_marker_60a3bab245626b31058acfc5f0f5e6f8 = L.circleMarker(
+                [-5.794, -35.211],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ec6a41ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_d1d4a952bdd793021b18e312d8c86f91);
+        
+    
+            circle_marker_60a3bab245626b31058acfc5f0f5e6f8.bindTooltip(
+                `<div>
+                     Na região Nordeste foram eleitos 1654 vereadores eleitos em Natal
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        var popup_375428992afcca942ce42119e177dde6 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_36235f458c560c8057119560efb4fb1e = $(`<div id="html_36235f458c560c8057119560efb4fb1e" style="width: 100.0%; height: 100.0%;">Na região Nordeste foram eleitos 1654 vereadores eleitos em Natal</div>`)[0];
+                popup_375428992afcca942ce42119e177dde6.setContent(html_36235f458c560c8057119560efb4fb1e);
+            
+        
+
+        circle_marker_60a3bab245626b31058acfc5f0f5e6f8.bindPopup(popup_375428992afcca942ce42119e177dde6)
+        ;
+
+        
+    
+    
+            var circle_marker_a722e660303a6dba1d9e2f45ccca19da = L.circleMarker(
+                [-8.76, -63.903],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#dd2d25ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_d1d4a952bdd793021b18e312d8c86f91);
+        
+    
+            circle_marker_a722e660303a6dba1d9e2f45ccca19da.bindTooltip(
+                `<div>
+                     Na região Norte foram eleitos 533 vereadores eleitos em Porto Velho
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        var popup_487e0fdf45be55c6aa253fb0aa80fb18 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_bc2ca749220970a9189601c2e70178bb = $(`<div id="html_bc2ca749220970a9189601c2e70178bb" style="width: 100.0%; height: 100.0%;">Na região Norte foram eleitos 533 vereadores eleitos em Porto Velho</div>`)[0];
+                popup_487e0fdf45be55c6aa253fb0aa80fb18.setContent(html_bc2ca749220970a9189601c2e70178bb);
+            
+        
+
+        circle_marker_a722e660303a6dba1d9e2f45ccca19da.bindPopup(popup_487e0fdf45be55c6aa253fb0aa80fb18)
+        ;
+
+        
+    
+    
+            var circle_marker_abbc2d47d6b72cd0bae4a2e5f132af8f = L.circleMarker(
+                [2.823, -60.675],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d7191cff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_d1d4a952bdd793021b18e312d8c86f91);
+        
+    
+            circle_marker_abbc2d47d6b72cd0bae4a2e5f132af8f.bindTooltip(
+                `<div>
+                     Na região Norte foram eleitos 157 vereadores eleitos em Boa Vista
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        var popup_5aeae25b27d9da84c9cd77d9578d3199 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_67fc70e4f499d8ad1334b4e4b89c3f3c = $(`<div id="html_67fc70e4f499d8ad1334b4e4b89c3f3c" style="width: 100.0%; height: 100.0%;">Na região Norte foram eleitos 157 vereadores eleitos em Boa Vista</div>`)[0];
+                popup_5aeae25b27d9da84c9cd77d9578d3199.setContent(html_67fc70e4f499d8ad1334b4e4b89c3f3c);
+            
+        
+
+        circle_marker_abbc2d47d6b72cd0bae4a2e5f132af8f.bindPopup(popup_5aeae25b27d9da84c9cd77d9578d3199)
+        ;
+
+        
+    
+    
+            var circle_marker_d4ffaf6464546c51038d2a163ec18ff9 = L.circleMarker(
+                [-30.027, -51.228],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#c2cdc3ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_d1d4a952bdd793021b18e312d8c86f91);
+        
+    
+            circle_marker_d4ffaf6464546c51038d2a163ec18ff9.bindTooltip(
+                `<div>
+                     Na região Sul foram eleitos 4903 vereadores eleitos em Porto Alegre
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        var popup_81d6d00474ca5b7b71564140e7edafda = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_f9861c01f6754c5a306071329a0f0413 = $(`<div id="html_f9861c01f6754c5a306071329a0f0413" style="width: 100.0%; height: 100.0%;">Na região Sul foram eleitos 4903 vereadores eleitos em Porto Alegre</div>`)[0];
+                popup_81d6d00474ca5b7b71564140e7edafda.setContent(html_f9861c01f6754c5a306071329a0f0413);
+            
+        
+
+        circle_marker_d4ffaf6464546c51038d2a163ec18ff9.bindPopup(popup_81d6d00474ca5b7b71564140e7edafda)
+        ;
+
+        
+    
+    
+            var circle_marker_26e4fa73d8e43a14b360783f286fdcfd = L.circleMarker(
+                [-27.594, -48.548],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#fdac60ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_d1d4a952bdd793021b18e312d8c86f91);
+        
+    
+            circle_marker_26e4fa73d8e43a14b360783f286fdcfd.bindTooltip(
+                `<div>
+                     Na região Sul foram eleitos 2881 vereadores eleitos em Florianópolis
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        var popup_8d496b17adae34c08502ac9e7f526efa = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_e2a0145c56576326f712c1ac85aed4aa = $(`<div id="html_e2a0145c56576326f712c1ac85aed4aa" style="width: 100.0%; height: 100.0%;">Na região Sul foram eleitos 2881 vereadores eleitos em Florianópolis</div>`)[0];
+                popup_8d496b17adae34c08502ac9e7f526efa.setContent(html_e2a0145c56576326f712c1ac85aed4aa);
+            
+        
+
+        circle_marker_26e4fa73d8e43a14b360783f286fdcfd.bindPopup(popup_8d496b17adae34c08502ac9e7f526efa)
+        ;
+
+        
+    
+    
+            var circle_marker_480534c457099c4753bc87e897a50bf9 = L.circleMarker(
+                [-10.912, -37.074],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#e03c2cff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_d1d4a952bdd793021b18e312d8c86f91);
+        
+    
+            circle_marker_480534c457099c4753bc87e897a50bf9.bindTooltip(
+                `<div>
+                     Na região Nordeste foram eleitos 805 vereadores eleitos em Aracaju
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        var popup_f3aad8cd4c8d906d63be878402e4a90e = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_9cc75f9183261de847daebc1a2ae540c = $(`<div id="html_9cc75f9183261de847daebc1a2ae540c" style="width: 100.0%; height: 100.0%;">Na região Nordeste foram eleitos 805 vereadores eleitos em Aracaju</div>`)[0];
+                popup_f3aad8cd4c8d906d63be878402e4a90e.setContent(html_9cc75f9183261de847daebc1a2ae540c);
+            
+        
+
+        circle_marker_480534c457099c4753bc87e897a50bf9.bindPopup(popup_f3aad8cd4c8d906d63be878402e4a90e)
+        ;
+
+        
+    
+    
+            var circle_marker_e37972ed510d22c85176e630d3ed3d14 = L.circleMarker(
+                [-23.55, -46.633],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#70aed2ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_d1d4a952bdd793021b18e312d8c86f91);
+        
+    
+            circle_marker_e37972ed510d22c85176e630d3ed3d14.bindTooltip(
+                `<div>
+                     Na região Sudeste foram eleitos 6954 vereadores eleitos em São Paulo
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        var popup_f9f222216eced72161769752210df8e1 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_94ab6f8c72d54a0d9cc668e91c86de08 = $(`<div id="html_94ab6f8c72d54a0d9cc668e91c86de08" style="width: 100.0%; height: 100.0%;">Na região Sudeste foram eleitos 6954 vereadores eleitos em São Paulo</div>`)[0];
+                popup_f9f222216eced72161769752210df8e1.setContent(html_94ab6f8c72d54a0d9cc668e91c86de08);
+            
+        
+
+        circle_marker_e37972ed510d22c85176e630d3ed3d14.bindPopup(popup_f9f222216eced72161769752210df8e1)
+        ;
+
+        
+    
+    
+            var circle_marker_ff9a461db230179668506c97569daea7 = L.circleMarker(
+                [-10.241, -48.355],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#e75739ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 3}
+            ).addTo(map_d1d4a952bdd793021b18e312d8c86f91);
+        
+    
+            circle_marker_ff9a461db230179668506c97569daea7.bindTooltip(
+                `<div>
+                     Na região Norte foram eleitos 1307 vereadores eleitos em Palmas
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+        var popup_7b2b29766df07adb657f915e0ea57a00 = L.popup({"maxWidth": 300});
+
+        
+            
+                var html_5e5f6c802ae635c622bef589c12d5be6 = $(`<div id="html_5e5f6c802ae635c622bef589c12d5be6" style="width: 100.0%; height: 100.0%;">Na região Norte foram eleitos 1307 vereadores eleitos em Palmas</div>`)[0];
+                popup_7b2b29766df07adb657f915e0ea57a00.setContent(html_5e5f6c802ae635c622bef589c12d5be6);
+            
+        
+
+        circle_marker_ff9a461db230179668506c97569daea7.bindPopup(popup_7b2b29766df07adb657f915e0ea57a00)
+        ;
+
+        
+    
+    
+    var color_map_094c70aaad2949b89e71202caf144752 = {};
+
+    
+    color_map_094c70aaad2949b89e71202caf144752.color = d3.scale.threshold()
+              .domain([151.0, 167.62124248496994, 184.24248496993988, 200.86372745490982, 217.48496993987976, 234.1062124248497, 250.72745490981964, 267.3486973947896, 283.9699398797595, 300.59118236472943, 317.2124248496994, 333.83366733466937, 350.4549098196393, 367.0761523046092, 383.69739478957916, 400.31863727454913, 416.93987975951904, 433.56112224448896, 450.1823647294589, 466.80360721442884, 483.4248496993988, 500.0460921843687, 516.6673346693387, 533.2885771543085, 549.9098196392786, 566.5310621242485, 583.1523046092184, 599.7735470941884, 616.3947895791583, 633.0160320641282, 649.6372745490983, 666.2585170340682, 682.8797595190381, 699.501002004008, 716.1222444889779, 732.7434869739479, 749.3647294589179, 765.9859719438878, 782.6072144288577, 799.2284569138277, 815.8496993987976, 832.4709418837675, 849.0921843687374, 865.7134268537075, 882.3346693386774, 898.9559118236473, 915.5771543086172, 932.1983967935872, 948.8196392785571, 965.440881763527, 982.062124248497, 998.683366733467, 1015.3046092184369, 1031.9258517034068, 1048.5470941883768, 1065.1683366733469, 1081.7895791583167, 1098.4108216432865, 1115.0320641282565, 1131.6533066132265, 1148.2745490981965, 1164.8957915831663, 1181.5170340681364, 1198.1382765531062, 1214.7595190380762, 1231.3807615230462, 1248.002004008016, 1264.623246492986, 1281.2444889779558, 1297.8657314629259, 1314.4869739478959, 1331.1082164328657, 1347.7294589178357, 1364.3507014028055, 1380.9719438877755, 1397.5931863727455, 1414.2144288577153, 1430.8356713426854, 1447.4569138276554, 1464.0781563126252, 1480.6993987975952, 1497.320641282565, 1513.941883767535, 1530.563126252505, 1547.1843687374749, 1563.805611222445, 1580.426853707415, 1597.0480961923847, 1613.6693386773547, 1630.2905811623245, 1646.9118236472946, 1663.5330661322646, 1680.1543086172344, 1696.7755511022044, 1713.3967935871744, 1730.0180360721442, 1746.6392785571143, 1763.260521042084, 1779.881763527054, 1796.5030060120241, 1813.124248496994, 1829.745490981964, 1846.366733466934, 1862.9879759519038, 1879.6092184368738, 1896.2304609218436, 1912.8517034068136, 1929.4729458917836, 1946.0941883767534, 1962.7154308617235, 1979.3366733466935, 1995.9579158316633, 2012.5791583166333, 2029.200400801603, 2045.8216432865731, 2062.442885771543, 2079.064128256513, 2095.685370741483, 2112.306613226453, 2128.927855711423, 2145.549098196393, 2162.1703406813626, 2178.7915831663327, 2195.4128256513027, 2212.0340681362727, 2228.6553106212423, 2245.2765531062123, 2261.8977955911823, 2278.5190380761524, 2295.1402805611224, 2311.7615230460924, 2328.382765531062, 2345.004008016032, 2361.625250501002, 2378.246492985972, 2394.867735470942, 2411.4889779559117, 2428.1102204408817, 2444.7314629258517, 2461.3527054108217, 2477.9739478957918, 2494.5951903807613, 2511.2164328657313, 2527.8376753507014, 2544.4589178356714, 2561.0801603206414, 2577.701402805611, 2594.322645290581, 2610.943887775551, 2627.565130260521, 2644.186372745491, 2660.807615230461, 2677.4288577154307, 2694.0501002004007, 2710.6713426853707, 2727.2925851703408, 2743.913827655311, 2760.5350701402804, 2777.1563126252504, 2793.7775551102204, 2810.3987975951904, 2827.0200400801605, 2843.64128256513, 2860.2625250501, 2876.88376753507, 2893.50501002004, 2910.12625250501, 2926.74749498998, 2943.3687374749497, 2959.9899799599198, 2976.61122244489, 2993.23246492986, 3009.85370741483, 3026.4749498997994, 3043.0961923847694, 3059.7174348697395, 3076.3386773547095, 3092.9599198396795, 3109.581162324649, 3126.202404809619, 3142.823647294589, 3159.444889779559, 3176.066132264529, 3192.687374749499, 3209.308617234469, 3225.929859719439, 3242.551102204409, 3259.172344689379, 3275.793587174349, 3292.4148296593185, 3309.0360721442885, 3325.6573146292585, 3342.2785571142285, 3358.8997995991986, 3375.521042084168, 3392.142284569138, 3408.763527054108, 3425.384769539078, 3442.0060120240482, 3458.6272545090183, 3475.248496993988, 3491.869739478958, 3508.490981963928, 3525.112224448898, 3541.733466933868, 3558.3547094188375, 3574.9759519038075, 3591.5971943887776, 3608.2184368737476, 3624.8396793587176, 3641.460921843687, 3658.082164328657, 3674.703406813627, 3691.3246492985973, 3707.9458917835673, 3724.567134268537, 3741.188376753507, 3757.809619238477, 3774.430861723447, 3791.052104208417, 3807.673346693387, 3824.2945891783565, 3840.9158316633266, 3857.5370741482966, 3874.1583166332666, 3890.7795591182366, 3907.400801603206, 3924.0220440881762, 3940.6432865731463, 3957.2645290581163, 3973.8857715430863, 3990.507014028056, 4007.128256513026, 4023.749498997996, 4040.370741482966, 4056.991983967936, 4073.613226452906, 4090.2344689378756, 4106.855711422846, 4123.476953907815, 4140.098196392786, 4156.719438877755, 4173.340681362725, 4189.961923847695, 4206.583166332665, 4223.204408817635, 4239.825651302605, 4256.446893787575, 4273.068136272545, 4289.689378757515, 4306.310621242485, 4322.931863727455, 4339.553106212425, 4356.174348697395, 4372.795591182365, 4389.416833667335, 4406.038076152305, 4422.659318637275, 4439.280561122245, 4455.901803607215, 4472.523046092185, 4489.144288577154, 4505.765531062124, 4522.386773547094, 4539.008016032064, 4555.629258517034, 4572.250501002004, 4588.871743486974, 4605.492985971944, 4622.114228456914, 4638.735470941884, 4655.356713426853, 4671.977955911823, 4688.599198396793, 4705.220440881763, 4721.841683366733, 4738.462925851703, 4755.084168336673, 4771.705410821643, 4788.3266533066135, 4804.9478957915835, 4821.5691382765535, 4838.190380761523, 4854.811623246493, 4871.432865731463, 4888.054108216433, 4904.675350701403, 4921.296593186373, 4937.917835671343, 4954.539078156313, 4971.160320641283, 4987.781563126253, 5004.402805611222, 5021.024048096192, 5037.645290581162, 5054.266533066132, 5070.887775551102, 5087.509018036072, 5104.130260521042, 5120.751503006012, 5137.372745490982, 5153.993987975952, 5170.615230460922, 5187.236472945891, 5203.857715430861, 5220.478957915831, 5237.100200400801, 5253.7214428857715, 5270.3426853707415, 5286.9639278557115, 5303.5851703406815, 5320.206412825652, 5336.827655310622, 5353.448897795592, 5370.070140280561, 5386.691382765531, 5403.312625250501, 5419.933867735471, 5436.555110220441, 5453.176352705411, 5469.797595190381, 5486.418837675351, 5503.040080160321, 5519.661322645291, 5536.28256513026, 5552.90380761523, 5569.5250501002, 5586.14629258517, 5602.76753507014, 5619.38877755511, 5636.01002004008, 5652.63126252505, 5669.25250501002, 5685.87374749499, 5702.49498997996, 5719.116232464929, 5735.7374749498995, 5752.3587174348695, 5768.9799599198395, 5785.60120240481, 5802.22244488978, 5818.84368737475, 5835.46492985972, 5852.08617234469, 5868.70741482966, 5885.32865731463, 5901.949899799599, 5918.571142284569, 5935.192384769539, 5951.813627254509, 5968.434869739479, 5985.056112224449, 6001.677354709419, 6018.298597194389, 6034.919839679359, 6051.541082164329, 6068.162324649298, 6084.783567134268, 6101.404809619238, 6118.026052104208, 6134.647294589178, 6151.268537074148, 6167.889779559118, 6184.511022044088, 6201.132264529058, 6217.753507014028, 6234.374749498998, 6250.9959919839675, 6267.617234468938, 6284.238476953908, 6300.859719438878, 6317.480961923848, 6334.102204408818, 6350.723446893788, 6367.344689378758, 6383.965931863728, 6400.587174348698, 6417.208416833667, 6433.829659318637, 6450.450901803607, 6467.072144288577, 6483.693386773547, 6500.314629258517, 6516.935871743487, 6533.557114228457, 6550.178356713427, 6566.799599198397, 6583.420841683367, 6600.042084168336, 6616.663326653306, 6633.284569138276, 6649.905811623246, 6666.527054108216, 6683.148296593186, 6699.769539078156, 6716.390781563126, 6733.0120240480965, 6749.6332665330665, 6766.2545090180365, 6782.875751503006, 6799.496993987976, 6816.118236472946, 6832.739478957916, 6849.360721442886, 6865.981963927856, 6882.603206412826, 6899.224448897796, 6915.845691382766, 6932.466933867736, 6949.088176352705, 6965.709418837675, 6982.330661322645, 6998.951903807615, 7015.573146292585, 7032.194388777555, 7048.815631262525, 7065.436873747495, 7082.058116232465, 7098.679358717435, 7115.300601202405, 7131.921843687374, 7148.543086172344, 7165.164328657314, 7181.785571142284, 7198.406813627254, 7215.0280561122245, 7231.6492985971945, 7248.2705410821645, 7264.891783567135, 7281.513026052105, 7298.134268537074, 7314.755511022044, 7331.376753507014, 7347.997995991984, 7364.619238476954, 7381.240480961924, 7397.861723446894, 7414.482965931864, 7431.104208416834, 7447.725450901804, 7464.346693386774, 7480.967935871743, 7497.589178356713, 7514.210420841683, 7530.831663326653, 7547.452905811623, 7564.074148296593, 7580.695390781563, 7597.316633266533, 7613.937875751503, 7630.559118236473, 7647.180360721443, 7663.801603206412, 7680.4228456913825, 7697.0440881763525, 7713.6653306613225, 7730.2865731462925, 7746.907815631263, 7763.529058116233, 7780.150300601203, 7796.771543086173, 7813.392785571143, 7830.014028056112, 7846.635270541082, 7863.256513026052, 7879.877755511022, 7896.498997995992, 7913.120240480962, 7929.741482965932, 7946.362725450902, 7962.983967935872, 7979.605210420842, 7996.226452905812, 8012.847695390781, 8029.468937875751, 8046.090180360721, 8062.711422845691, 8079.332665330661, 8095.953907815631, 8112.575150300601, 8129.196392785571, 8145.817635270541, 8162.438877755511, 8179.060120240481, 8195.68136272545, 8212.302605210421, 8228.92384769539, 8245.54509018036, 8262.16633266533, 8278.787575150302, 8295.40881763527, 8312.03006012024, 8328.65130260521, 8345.27254509018, 8361.89378757515, 8378.51503006012, 8395.13627254509, 8411.75751503006, 8428.37875751503, 8445.0])
+              .range(['#d7191cff', '#d8191cff', '#d81a1cff', '#d81b1dff', '#d81c1dff', '#d81d1eff', '#d91e1eff', '#d91f1fff', '#d9201fff', '#d9211fff', '#da2220ff', '#da2220ff', '#da2321ff', '#da2421ff', '#db2521ff', '#db2622ff', '#db2722ff', '#db2823ff', '#db2923ff', '#dc2a24ff', '#dc2b24ff', '#dc2b24ff', '#dc2c25ff', '#dd2d25ff', '#dd2e26ff', '#dd2f26ff', '#dd3026ff', '#de3127ff', '#de3227ff', '#de3328ff', '#de3428ff', '#de3429ff', '#df3529ff', '#df3629ff', '#df372aff', '#df382aff', '#e0392bff', '#e03a2bff', '#e03b2bff', '#e03c2cff', '#e13d2cff', '#e13d2dff', '#e13e2dff', '#e13f2eff', '#e1402eff', '#e2412eff', '#e2422fff', '#e2432fff', '#e24430ff', '#e34530ff', '#e34630ff', '#e34631ff', '#e34731ff', '#e34832ff', '#e44932ff', '#e44a33ff', '#e44b33ff', '#e44c33ff', '#e54d34ff', '#e54e34ff', '#e54f35ff', '#e54f35ff', '#e65035ff', '#e65136ff', '#e65236ff', '#e65337ff', '#e65437ff', '#e75538ff', '#e75638ff', '#e75738ff', '#e75839ff', '#e85839ff', '#e8593aff', '#e85a3aff', '#e85b3aff', '#e95c3bff', '#e95d3bff', '#e95e3cff', '#e95f3cff', '#e9603dff', '#ea613dff', '#ea613dff', '#ea623eff', '#ea633eff', '#eb643fff', '#eb653fff', '#eb663fff', '#eb6740ff', '#ec6840ff', '#ec6941ff', '#ec6a41ff', '#ec6a42ff', '#ec6b42ff', '#ed6c42ff', '#ed6d43ff', '#ed6e43ff', '#ed6f44ff', '#ee7044ff', '#ee7144ff', '#ee7245ff', '#ee7345ff', '#ef7346ff', '#ef7446ff', '#ef7547ff', '#ef7647ff', '#ef7747ff', '#f07848ff', '#f07948ff', '#f07a49ff', '#f07b49ff', '#f17c49ff', '#f17c4aff', '#f17d4aff', '#f17e4bff', '#f17f4bff', '#f2804cff', '#f2814cff', '#f2824cff', '#f2834dff', '#f3844dff', '#f3854eff', '#f3854eff', '#f3864eff', '#f4874fff', '#f4884fff', '#f48950ff', '#f48a50ff', '#f48b50ff', '#f58c51ff', '#f58d51ff', '#f58e52ff', '#f58e52ff', '#f68f53ff', '#f69053ff', '#f69153ff', '#f69254ff', '#f79354ff', '#f79455ff', '#f79555ff', '#f79655ff', '#f79756ff', '#f89756ff', '#f89857ff', '#f89957ff', '#f89a58ff', '#f99b58ff', '#f99c58ff', '#f99d59ff', '#f99e59ff', '#fa9f5aff', '#fa9f5aff', '#faa05aff', '#faa15bff', '#faa25bff', '#fba35cff', '#fba45cff', '#fba55dff', '#fba65dff', '#fca75dff', '#fca85eff', '#fca85eff', '#fca95fff', '#fcaa5fff', '#fdab5fff', '#fdac60ff', '#fdad60ff', '#fdae61ff', '#fdae61ff', '#fdaf62ff', '#fcaf63ff', '#fcaf64ff', '#fbaf65ff', '#fbb066ff', '#fab066ff', '#fab067ff', '#f9b068ff', '#f9b169ff', '#f8b16aff', '#f8b16aff', '#f7b16bff', '#f7b26cff', '#f6b26dff', '#f6b26eff', '#f5b36fff', '#f5b36fff', '#f4b370ff', '#f4b371ff', '#f3b472ff', '#f3b473ff', '#f2b473ff', '#f2b474ff', '#f1b575ff', '#f1b576ff', '#f0b577ff', '#f0b578ff', '#efb678ff', '#efb679ff', '#eeb67aff', '#eeb67bff', '#edb77cff', '#edb77dff', '#ecb77dff', '#ecb77eff', '#ebb87fff', '#ebb880ff', '#eab881ff', '#eab881ff', '#e9b982ff', '#e9b983ff', '#e8b984ff', '#e8ba85ff', '#e7ba86ff', '#e7ba86ff', '#e6ba87ff', '#e6bb88ff', '#e5bb89ff', '#e5bb8aff', '#e4bb8aff', '#e4bc8bff', '#e3bc8cff', '#e3bc8dff', '#e2bc8eff', '#e2bd8fff', '#e1bd8fff', '#e1bd90ff', '#e0bd91ff', '#e0be92ff', '#dfbe93ff', '#dfbe93ff', '#debe94ff', '#debf95ff', '#ddbf96ff', '#ddbf97ff', '#dcbf98ff', '#dcc098ff', '#dcc099ff', '#dbc09aff', '#dbc19bff', '#dac19cff', '#dac19dff', '#d9c19dff', '#d9c29eff', '#d8c29fff', '#d8c2a0ff', '#d7c2a1ff', '#d7c3a1ff', '#d6c3a2ff', '#d6c3a3ff', '#d5c3a4ff', '#d5c4a5ff', '#d4c4a6ff', '#d4c4a6ff', '#d3c4a7ff', '#d3c5a8ff', '#d2c5a9ff', '#d2c5aaff', '#d1c5aaff', '#d1c6abff', '#d0c6acff', '#d0c6adff', '#cfc6aeff', '#cfc7afff', '#cec7afff', '#cec7b0ff', '#cdc8b1ff', '#cdc8b2ff', '#ccc8b3ff', '#ccc8b4ff', '#cbc9b4ff', '#cbc9b5ff', '#cac9b6ff', '#cac9b7ff', '#c9cab8ff', '#c9cab8ff', '#c8cab9ff', '#c8cabaff', '#c7cbbbff', '#c7cbbcff', '#c6cbbdff', '#c6cbbdff', '#c5ccbeff', '#c5ccbfff', '#c4ccc0ff', '#c4ccc1ff', '#c3cdc1ff', '#c3cdc2ff', '#c2cdc3ff', '#c2cdc4ff', '#c1cec5ff', '#c1cec6ff', '#c0cec6ff', '#c0cfc7ff', '#bfcfc8ff', '#bfcfc9ff', '#becfcaff', '#bed0caff', '#bdd0cbff', '#bdd0ccff', '#bcd0cdff', '#bcd1ceff', '#bbd1cfff', '#bbd1cfff', '#bad1d0ff', '#bad2d1ff', '#b9d2d2ff', '#b9d2d3ff', '#b8d2d4ff', '#b8d3d4ff', '#b7d3d5ff', '#b7d3d6ff', '#b6d3d7ff', '#b6d4d8ff', '#b5d4d8ff', '#b5d4d9ff', '#b4d5daff', '#b4d5dbff', '#b3d5dcff', '#b3d5ddff', '#b2d6ddff', '#b2d6deff', '#b1d6dfff', '#b1d6e0ff', '#b0d7e1ff', '#b0d7e1ff', '#afd7e2ff', '#afd7e3ff', '#aed8e4ff', '#aed8e5ff', '#add8e6ff', '#add8e6ff', '#acd9e7ff', '#acd9e8ff', '#acd9e9ff', '#abd9e9ff', '#aad9e9ff', '#a9d8e9ff', '#a9d7e8ff', '#a8d7e8ff', '#a7d6e8ff', '#a6d6e7ff', '#a6d5e7ff', '#a5d5e7ff', '#a4d4e7ff', '#a3d3e6ff', '#a2d3e6ff', '#a2d2e6ff', '#a1d2e5ff', '#a0d1e5ff', '#9fd1e5ff', '#9fd0e4ff', '#9ed0e4ff', '#9dcfe4ff', '#9ccee3ff', '#9ccee3ff', '#9bcde3ff', '#9acde3ff', '#99cce2ff', '#99cce2ff', '#98cbe2ff', '#97cae1ff', '#96cae1ff', '#95c9e1ff', '#95c9e0ff', '#94c8e0ff', '#93c8e0ff', '#92c7dfff', '#92c6dfff', '#91c6dfff', '#90c5dfff', '#8fc5deff', '#8fc4deff', '#8ec4deff', '#8dc3ddff', '#8cc2ddff', '#8bc2ddff', '#8bc1dcff', '#8ac1dcff', '#89c0dcff', '#88c0dbff', '#88bfdbff', '#87bedbff', '#86bedbff', '#85bddaff', '#85bddaff', '#84bcdaff', '#83bcd9ff', '#82bbd9ff', '#82bbd9ff', '#81bad8ff', '#80b9d8ff', '#7fb9d8ff', '#7eb8d7ff', '#7eb8d7ff', '#7db7d7ff', '#7cb7d7ff', '#7bb6d6ff', '#7bb5d6ff', '#7ab5d6ff', '#79b4d5ff', '#78b4d5ff', '#78b3d5ff', '#77b3d4ff', '#76b2d4ff', '#75b1d4ff', '#74b1d3ff', '#74b0d3ff', '#73b0d3ff', '#72afd3ff', '#71afd2ff', '#71aed2ff', '#70add2ff', '#6fadd1ff', '#6eacd1ff', '#6eacd1ff', '#6dabd0ff', '#6cabd0ff', '#6baad0ff', '#6baacfff', '#6aa9cfff', '#69a8cfff', '#68a8cfff', '#67a7ceff', '#67a7ceff', '#66a6ceff', '#65a6cdff', '#64a5cdff', '#64a4cdff', '#63a4ccff', '#62a3ccff', '#61a3ccff', '#61a2cbff', '#60a2cbff', '#5fa1cbff', '#5ea0cbff', '#5da0caff', '#5d9fcaff', '#5c9fcaff', '#5b9ec9ff', '#5a9ec9ff', '#5a9dc9ff', '#599cc8ff', '#589cc8ff', '#579bc8ff', '#579bc7ff', '#569ac7ff', '#559ac7ff', '#5499c7ff', '#5498c6ff', '#5398c6ff', '#5297c6ff', '#5197c5ff', '#5096c5ff', '#5096c5ff', '#4f95c4ff', '#4e95c4ff', '#4d94c4ff', '#4d93c3ff', '#4c93c3ff', '#4b92c3ff', '#4a92c3ff', '#4a91c2ff', '#4991c2ff', '#4890c2ff', '#478fc1ff', '#478fc1ff', '#468ec1ff', '#458ec0ff', '#448dc0ff', '#438dc0ff', '#438cbfff', '#428bbfff', '#418bbfff', '#408abfff', '#408abeff', '#3f89beff', '#3e89beff', '#3d88bdff', '#3d87bdff', '#3c87bdff', '#3b86bcff', '#3a86bcff', '#3985bcff', '#3985bbff', '#3884bbff', '#3783bbff', '#3683bbff', '#3682baff', '#3582baff', '#3481baff', '#3381b9ff', '#3380b9ff', '#3280b9ff', '#317fb8ff', '#307eb8ff', '#307eb8ff', '#2f7db7ff', '#2e7db7ff', '#2d7cb7ff', '#2c7cb7ff', '#2c7bb6ff']);
+    
+
+    color_map_094c70aaad2949b89e71202caf144752.x = d3.scale.linear()
+              .domain([151.0, 8445.0])
+              .range([0, 450 - 50]);
+
+    color_map_094c70aaad2949b89e71202caf144752.legend = L.control({position: 'topright'});
+    color_map_094c70aaad2949b89e71202caf144752.legend.onAdd = function (map) {var div = L.DomUtil.create('div', 'legend'); return div};
+    color_map_094c70aaad2949b89e71202caf144752.legend.addTo(map_d1d4a952bdd793021b18e312d8c86f91);
+
+    color_map_094c70aaad2949b89e71202caf144752.xAxis = d3.svg.axis()
+        .scale(color_map_094c70aaad2949b89e71202caf144752.x)
+        .orient("top")
+        .tickSize(1)
+        .tickValues([151.0, 2915.6666666666665, 5680.333333333333, 8445.0]);
+
+    color_map_094c70aaad2949b89e71202caf144752.svg = d3.select(".legend.leaflet-control").append("svg")
+        .attr("id", 'legend')
+        .attr("width", 450)
+        .attr("height", 40);
+
+    color_map_094c70aaad2949b89e71202caf144752.g = color_map_094c70aaad2949b89e71202caf144752.svg.append("g")
+        .attr("class", "key")
+        .attr("transform", "translate(25,16)");
+
+    color_map_094c70aaad2949b89e71202caf144752.g.selectAll("rect")
+        .data(color_map_094c70aaad2949b89e71202caf144752.color.range().map(function(d, i) {
+          return {
+            x0: i ? color_map_094c70aaad2949b89e71202caf144752.x(color_map_094c70aaad2949b89e71202caf144752.color.domain()[i - 1]) : color_map_094c70aaad2949b89e71202caf144752.x.range()[0],
+            x1: i < color_map_094c70aaad2949b89e71202caf144752.color.domain().length ? color_map_094c70aaad2949b89e71202caf144752.x(color_map_094c70aaad2949b89e71202caf144752.color.domain()[i]) : color_map_094c70aaad2949b89e71202caf144752.x.range()[1],
+            z: d
+          };
+        }))
+      .enter().append("rect")
+        .attr("height", 40 - 30)
+        .attr("x", function(d) { return d.x0; })
+        .attr("width", function(d) { return d.x1 - d.x0; })
+        .style("fill", function(d) { return d.z; });
+
+    color_map_094c70aaad2949b89e71202caf144752.g.call(color_map_094c70aaad2949b89e71202caf144752.xAxis).append("text")
+        .attr("class", "caption")
+        .attr("y", 21)
+        .text("Quantidade");
+</script>
+</html>
