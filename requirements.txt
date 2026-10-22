@@ -1,0 +1,12 @@
+pandas
+numpy
+matplotlib
+seaborn
+geopandas
+scikit-learn
+joblib
+jupyter
+plotly
+scipy
+streamlit
+# só para rodar o notebook original (v1): kaleido, folium, branca

@@ -158,3 +158,6 @@ cython_debug/
 #  and can be added to the global gitignore or merged into this file.  For a more nuclear
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
+
+# Arquivos brutos do TSE baixados pelo notebook (cerca de 300 MB)
+Datasets/tse_bruto/
