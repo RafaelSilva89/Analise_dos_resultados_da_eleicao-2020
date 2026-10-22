@@ -1,0 +1,42 @@
+{
+  "data_treino": "2026-10-22 20:50",
+  "modelo": "HistGradientBoosting ajustado (Pipeline: one-hot da UF + HistGradientBoostingRegressor)",
+  "arquivo": "modelo_abstencao.pkl",
+  "treinado_com": "4.454 municípios (treino + validação, eleição de 2020)",
+  "colunas_de_entrada": [
+    "uf",
+    "capital",
+    "log_aptos",
+    "candidatos_prefeito",
+    "candidatos_por_vaga_vereador",
+    "log_pib_per_capita",
+    "pct_urbana",
+    "pct_idosos",
+    "eleitores_por_habitante",
+    "abstencao_anterior"
+  ],
+  "alvo": "abstencao (abstenções ÷ eleitores aptos, 1º turno)",
+  "faixa_de_erro_80": {
+    "p10": -0.0322,
+    "p90": 0.0294
+  },
+  "metricas_no_teste": {
+    "MAE (p.p.)": 2.0176,
+    "MAPE": 0.1398,
+    "RMSE (p.p.)": 2.6497,
+    "R²": 0.7987,
+    "MPE": 0.04
+  },
+  "hiperparametros": {
+    "min_samples_leaf": 10,
+    "max_leaf_nodes": 31,
+    "max_iter": 400,
+    "learning_rate": 0.02,
+    "l2_regularization": 0.1
+  },
+  "avisos": [
+    "Descreve o padrão de 2020 (pandemia): em 2024 superestimou o nível em ~2,8 p.p.",
+    "Para eleições futuras, use o modelo multi-eleição (modelo_abstencao_multieleicao.pkl).",
+    "Não use comparecimento, brancos ou nulos como entrada: são resultados da própria votação (vazamento)."
+  ]
+}

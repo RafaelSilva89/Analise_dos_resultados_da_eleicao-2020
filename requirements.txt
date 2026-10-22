@@ -8,5 +8,7 @@ joblib
 jupyter
 plotly
 scipy
+xgboost
+lightgbm
 streamlit
 # só para rodar o notebook original (v1): kaleido, folium, branca

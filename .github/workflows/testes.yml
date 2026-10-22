@@ -14,6 +14,6 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      # Os testes usam src/eleicao.py, src/dados_externos.py e src/selecao.py (pandas, numpy e scikit-learn)
-      - run: pip install pandas numpy scikit-learn pytest
+      # Os testes usam src/eleicao.py, src/dados_externos.py e src/selecao.py e as funções de avaliação e estatística
+      - run: pip install pandas numpy scipy scikit-learn matplotlib seaborn pytest
       - run: pytest -v

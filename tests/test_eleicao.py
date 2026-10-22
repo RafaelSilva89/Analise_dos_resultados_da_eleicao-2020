@@ -199,3 +199,21 @@ def test_selecao_features_ordena_e_seleciona_k_colunas():
     assert ranking['score'].is_monotonic_decreasing
     assert seletor.transform(X).shape == (300, 1)
     assert importancia_random_forest(X, y).index[0] == 'sinal'
+
+
+def test_testes_estatisticos_e_iqr():
+    from src.estatistica import regra_iqr, teste_kruskal, teste_spearman, teste_wilcoxon
+    valores = pd.Series([1, 2, 3, 10, 11, 12, 20, 21, 22])
+    grupos = ['a'] * 3 + ['b'] * 3 + ['c'] * 3
+    assert teste_kruskal(valores, grupos)['tamanho do efeito'] > 0.5          # grupos bem separados
+    assert teste_spearman(range(10), range(10))['tamanho do efeito'] == pytest.approx(1.0)
+    assert teste_wilcoxon([1, 2, 3, 4, 5, 6], [2, 3, 4, 5, 6, 8])['tamanho do efeito'] == pytest.approx(1.0)
+    assert regra_iqr(pd.Series([1, 2, 3, 4, 100]))['outliers'] == 1
+
+
+def test_ml_error_calcula_as_metricas_em_pontos_percentuais():
+    from src.avaliacao import ml_error
+    metricas = ml_error('teste', [0.10, 0.20], [0.12, 0.18]).iloc[0]
+    assert metricas['MAE (p.p.)'] == pytest.approx(2.0)
+    assert metricas['MAPE'] == pytest.approx((0.2 + 0.1) / 2)
+    assert metricas['MPE'] == pytest.approx((0.2 - 0.1) / 2)

@@ -19,7 +19,7 @@
 | Modelo | Estima a abstenção esperada de cada município com erro médio de **2,0 pontos percentuais** (explica **80%** das diferenças). Um modelo **multi-eleição** acerta 2024 com erro de **2,3 p.p.**, contra 3,4 do modelo de uma eleição só |
 | Coligações | Quem concorreu sozinho a prefeito venceu **9%** das vezes; com 8 ou mais partidos na aliança, **67%** |
 | Qualidade dos dados | A v2 corrigiu **erros da base original**: colunas com o nome errado, **114 candidatos do 2º turno** contados como eleitos e **7 códigos IBGE trocados** |
-| Entrega | Notebook CRISP-DM, **17 testes automatizados** (rodando no GitHub Actions) e **app Streamlit** com mapa interativo, consulta por município, evolução 2016–2024 e simulador para a próxima eleição |
+| Entrega | Notebook CRISP-DM, **19 testes automatizados** (rodando no GitHub Actions) e **app Streamlit** com mapa interativo, consulta por município, evolução 2016–2024 e simulador para a próxima eleição |
 
 ---
 
@@ -101,7 +101,13 @@ Analise_dos_resultados_da_eleicao-2020/
 ├── Imagens/                                   # gráficos gerados pelos notebooks
 ├── Model/
 │   ├── modelo_abstencao.pkl                   # modelo de 2020 + faixa de erro (usado pelo app)
-│   └── modelo_abstencao_multieleicao.pkl      # modelo multi-eleição para a próxima eleição
+│   ├── modelo_abstencao_multieleicao.pkl      # modelo multi-eleição para a próxima eleição
+│   └── *.json                                 # fichas dos modelos (métricas, hiperparâmetros, avisos)
+├── docs/
+│   └── decisoes_analiticas.md                 # registro das decisões do projeto (DA-01 a DA-09)
+├── reports/
+│   ├── comparacao_modelos.csv                 # métricas dos 7 algoritmos na validação
+│   └── erro_por_uf.csv                        # tradução do erro por estado
 ├── Notebooks/
 │   ├── Análise dos resultados da eleição - 2020.ipynb        # versão original
 │   └── Análise dos resultados da eleição - 2020 - v2.ipynb   # versão reorganizada (CRISP-DM)
@@ -109,9 +115,11 @@ Analise_dos_resultados_da_eleicao-2020/
 │   ├── eleicao.py                             # leitura, tabelas por município/partido e base do modelo
 │   ├── dados_externos.py                      # download e resumo de TSE (2012–2024), IBGE e Covid-19
 │   ├── selecao.py                             # seleção de variáveis (Random Forest + Informação Mútua)
+│   ├── estatistica.py                         # testes das hipóteses (com tamanho de efeito) e regra do IQR
+│   ├── avaliacao.py                           # ml_error, relatório de validação, comparação, tradução do erro e ficha
 │   └── graficos.py                            # funções de gráficos
 ├── tests/
-│   └── test_eleicao.py                        # 17 testes automatizados (pytest)
+│   └── test_eleicao.py                        # 19 testes automatizados (pytest)
 ├── .github/workflows/testes.yml               # roda os testes a cada push (GitHub Actions)
 ├── app.py                                     # app Streamlit
 ├── pytest.ini
@@ -144,9 +152,9 @@ streamlit run app.py
 | Fase | O que foi feito |
 |---|---|
 | **01. Entendimento do negócio** | Definição das 6 perguntas e do público |
-| **02. Preparação dos dados** | Correção do significado das colunas e dos códigos IBGE, tabelas por município e partido, análise exploratória com 14 hipóteses |
-| **03. Modelagem** | Seleção de variáveis (eleição, IBGE, histórico), comparação de 4 modelos de regressão, ajuste fino, faixa de erro e calibração |
-| **04. Avaliação** | Erro no teste, municípios fora do padrão, variáveis mais importantes, **teste fora do tempo (2024)** e **modelo multi-eleição** |
+| **02. Preparação dos dados** | Correção do significado das colunas e dos códigos IBGE, outliers pela regra do IQR, tabelas por município e partido, EDA com 14 hipóteses (cada uma com teste estatístico e tamanho de efeito) |
+| **03. Modelagem** | Divisão 60/20/20, seleção de variáveis, 7 algoritmos (uma seção cada) com validação cruzada, ajuste fino, faixa de erro, calibração e teste anti-vazamento |
+| **04. Avaliação** | Erro no teste, **tradução do erro por estado**, municípios fora do padrão, variáveis mais importantes, **teste fora do tempo (2024)** e **modelo multi-eleição** |
 | **05. Implantação** | Tabelas e modelo salvos, simulação de cenários e app Streamlit |
 
 ## 7. Principais descobertas da análise exploratória
@@ -230,15 +238,26 @@ A correlação entre os óbitos de Covid por 100 mil habitantes até a véspera 
    - **IBGE:** PIB per capita, % de população urbana, % de idosos e eleitores por habitante;
    - **histórico:** abstenção do município na eleição anterior (2016).
 2. **Sem "colar a resposta":** comparecimento, brancos e nulos ficaram de fora, pois são **resultados da própria votação** (*vazamento de dados*).
-3. **Treino e teste:** 80% dos municípios para treinar e comparar modelos com **validação cruzada**, 20% guardados para o teste final.
+3. **Treino, validação e teste:** 60% dos municípios para treinar, 20% para comparar os algoritmos e ajustar (validação) e 20% guardados para o teste final. A comparação também usa **validação cruzada** (média ± desvio).
 4. **Seleção de variáveis:** a relevância de cada coluna foi medida por **Random Forest** ("quais perguntas o modelo mais usou") e por **Informação Mútua** ("quanto a variável, sozinha, conta sobre a abstenção"). Os dois apontam a **abstenção anterior**, o **tamanho do município** e a **concorrência para vereador** como as mais relevantes. Como confirmação, cada grupo novo foi testado separadamente. O IBGE reduziu o erro de 2,77 para 2,62 p.p.; a abstenção anterior, para **2,02 p.p.** A Covid não ajudou (2,03 p.p.) e ficou de fora.
-5. **4 modelos comparados**, do mais simples ao mais sofisticado, e **ajuste fino** do melhor (**HistGradientBoosting**):
+5. **7 algoritmos comparados**, cada um com a sua seção (métricas no padrão do projeto Rossmann: MAE, MAPE, RMSE e R², e erro no treino × validação para detectar sobreajuste), e **ajuste fino** do melhor (**HistGradientBoosting**):
+
+| Algoritmo | MAE na validação | R² | MAE na validação cruzada |
+|---|---|---|---|
+| **HistGradientBoosting** ✅ | **1,98 p.p.** | **0,82** | **2,02 ± 0,04** |
+| LightGBM | 2,00 p.p. | 0,82 | 2,03 ± 0,04 |
+| XGBoost | 2,06 p.p. | 0,81 | 2,10 ± 0,04 |
+| Random Forest | 2,08 p.p. | 0,80 | 2,10 ± 0,05 |
+| Regressão Linear | 2,23 p.p. | 0,78 | 2,30 ± 0,04 |
+| Lasso | 2,36 p.p. | 0,75 | 2,46 ± 0,08 |
+| Média (referência) | 4,93 p.p. | 0,00 | 5,04 ± 0,15 |
 
 <div align="center">
 <img src="Imagens/Comparacao de modelos.png" width="650px">
 </div>
 
-6. **Faixa de erro:** em vez de um limiar (que só faz sentido em classificação), medimos o quanto a previsão costuma errar. Em 80% dos municípios, a abstenção real fica a até **3,2 p.p.** da prevista.
+6. **Faixa de erro:** em vez de um limiar (que só faz sentido em classificação), medimos o quanto a previsão costuma errar. Em 80% dos municípios, a abstenção real fica entre **3,2 p.p. abaixo e 2,9 p.p. acima** da prevista.
+7. **Teste anti-vazamento:** com a taxa de comparecimento como entrada, o erro "cairia" para **0,04 p.p.** (R² de 0,999), porque ela é 1 − abstenção. Por isso o modelo usa só informações conhecidas **antes** da eleição.
 
 > 💡 **Analogia:** o modelo funciona como um "termômetro de referência". Ele diz qual seria a abstenção normal para uma cidade com aquele histórico, tamanho e perfil. Quando a abstenção real foge muito disso, vale investigar.
 
@@ -251,7 +270,13 @@ A correlação entre os óbitos de Covid por 100 mil habitantes até a véspera 
 | Viés médio | — | +0,1 p.p. | +2,8 p.p. | −0,5 p.p. |
 | Ordenação dos municípios (Spearman) | — | **0,89** | 0,86 | 0,85 |
 
-**Em linguagem de negócio:** se o modelo prevê 20% de abstenção para uma cidade, o erro típico é de 2 pontos para cima ou para baixo, e em 80% dos casos a abstenção real fica entre 16,8% e 23,2%. Ele é **bem calibrado** em todas as faixas.
+**Em linguagem de negócio:** se o modelo prevê 20% de abstenção para uma cidade, o erro típico é de 2 pontos para cima ou para baixo, e em 80% dos casos a abstenção real fica entre 16,8% e 22,9%. Ele é **bem calibrado** em todas as faixas.
+
+**Tradução do erro por estado:** o modelo é mais preciso no Amazonas (erro médio de 1,1 p.p.), Rio de Janeiro (1,4) e São Paulo (1,5) e menos preciso no Maranhão (2,8) e em Rondônia (2,7). Em São Paulo, a abstenção prevista é de 22,0%, com melhor cenário de 20,5% e pior de 23,5%.
+
+<div align="center">
+<img src="Imagens/Traducao do erro.png" width="850px">
+</div>
 
 <div align="center">
 <img src="Imagens/Importancia das variaveis.png" width="650px">
@@ -300,7 +325,9 @@ A versão original foi mantida em `Notebooks/` para mostrar a evolução.
 | 6 | Só 2020 e só dados do TSE | Sem comparação nem contexto socioeconômico | Eleições de **2012 a 2024**, indicadores do **IBGE**, dados de **Covid** e análise de **coligações** |
 | 7 | — | `codigo_ibge` trocado em 7 municípios na base | Correção automática comparando os nomes, com teste |
 | 8 | Só análise descritiva | — | **Modelo de abstenção esperada**, com teste fora do tempo, e **modelo multi-eleição** para a próxima eleição |
-| 9 | Caminho `Dataset/` no código | A pasta se chama `Datasets/`: o notebook não rodava | Caminhos corrigidos, funções em `src/` e **17 testes** com `pytest` rodando no **GitHub Actions** |
+| 9 | Caminho `Dataset/` no código | A pasta se chama `Datasets/`: o notebook não rodava | Caminhos corrigidos, funções em `src/` e **19 testes** com `pytest` rodando no **GitHub Actions** |
+| 10 | Hipóteses só com gráficos | Não diferencia efeito real de acaso | **Testes estatísticos** com tamanho de efeito em todas as 14 hipóteses |
+| 11 | Sem registro das decisões | — | `docs/decisoes_analiticas.md`, fichas dos modelos em JSON e pasta `reports/` |
 
 ## 12. Insights
 

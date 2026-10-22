@@ -1,0 +1,29 @@
+{
+  "data_treino": "2026-10-22 20:50",
+  "modelo": "HistGradientBoosting multi-eleição (alvo = abstenção do município - abstenção nacional)",
+  "arquivo": "modelo_abstencao_multieleicao.pkl",
+  "treinado_com": "eleições de 2016, 2020 e 2024",
+  "colunas_de_entrada": [
+    "uf",
+    "capital",
+    "log_aptos",
+    "candidatos_prefeito",
+    "candidatos_por_vaga_vereador",
+    "log_pib_per_capita",
+    "pct_urbana",
+    "pct_idosos",
+    "eleitores_por_habitante",
+    "abstencao_anterior_relativa"
+  ],
+  "nivel_nacional_da_ultima_eleicao": 0.2168,
+  "metricas_no_teste_2024": {
+    "MAE (p.p.)": 2.2668,
+    "MAPE": 0.1492,
+    "RMSE (p.p.)": 2.8262,
+    "R²": 0.7262,
+    "MPE": -0.0216
+  },
+  "avisos": [
+    "A previsão final = previsão do modelo + abstenção nacional esperada (cenário informado pelo usuário)."
+  ]
+}
