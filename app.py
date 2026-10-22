@@ -29,8 +29,9 @@ def carregar_dados():
 
 
 @st.cache_resource
-def carregar_modelo():
-    return joblib.load(RAIZ / 'Model' / 'modelo_abstencao.pkl')
+def carregar_modelos():
+    pasta = RAIZ / 'Model'
+    return joblib.load(pasta / 'modelo_abstencao.pkl'), joblib.load(pasta / 'modelo_abstencao_multieleicao.pkl')
 
 
 def pct(valor):
@@ -42,7 +43,7 @@ def milhar(valor):
 
 
 municipios, eleitos, painel, prefeitos_final, mapa_uf = carregar_dados()
-artefato = carregar_modelo()
+artefato, artefato_multi = carregar_modelos()
 modelo = artefato['modelo']
 prefeito = municipios[municipios['cargo'] == 'prefeito']
 base_2020 = base_modelo(painel, 2020)
@@ -166,8 +167,11 @@ with aba_evolucao:
 
 # ----------------------------------------------------------------------------- Simulador
 with aba_simulador:
-    st.write('Informe o perfil de um município para estimar a **abstenção esperada** (padrão de 2020). '
+    st.write('Informe o perfil de um município para estimar a **abstenção esperada**. '
              'Os valores iniciais são os do município típico (mediana).')
+    tipo_modelo = st.radio('Modelo', ['Padrão de 2020', 'Próxima eleição (multi-eleição)'], horizontal=True,
+                           help='O modelo multi-eleição foi treinado com 2016, 2020 e 2024 e recebe a abstenção '
+                                'nacional esperada como cenário.')
     mediana = base_2020.median(numeric_only=True)
     col1, col2, col3 = st.columns(3)
     uf_sim = col1.selectbox('Estado', sorted(prefeito['uf'].unique()), key='uf_sim')
@@ -175,7 +179,7 @@ with aba_simulador:
     capital = col1.checkbox('É capital do estado')
     candidatos = col2.slider('Candidatos a prefeito', 1, 20, 3)
     por_vaga = col2.slider('Candidatos a vereador por vaga', 1.0, 40.0, 8.0, step=0.5)
-    anterior = col2.slider('Abstenção na eleição anterior (2016)', 0.0, 0.40,
+    anterior = col2.slider('Abstenção do município na eleição anterior', 0.0, 0.40,
                            float(round(mediana['abstencao_anterior'], 2)), step=0.01, format='%.2f')
     pib = col3.number_input('PIB per capita (R$)', min_value=3_000, max_value=500_000,
                             value=int(round(10 ** mediana['log_pib_per_capita'], -3)), step=1_000)
@@ -190,10 +194,20 @@ with aba_simulador:
                              'candidatos_prefeito': candidatos, 'candidatos_por_vaga_vereador': por_vaga,
                              'log_pib_per_capita': np.log10(pib), 'pct_urbana': urbana, 'pct_idosos': idosos,
                              'eleitores_por_habitante': por_habitante, 'abstencao_anterior': anterior}])
-    previsao = modelo.predict(entrada[artefato['features']])[0]
+    if tipo_modelo == 'Padrão de 2020':
+        escolhido = artefato
+        previsao = modelo.predict(entrada[artefato['features']])[0]
+    else:
+        escolhido = artefato_multi
+        nivel = st.slider('Abstenção nacional esperada na próxima eleição', 0.10, 0.30,
+                          float(round(artefato_multi['nivel_ultima_eleicao'], 3)), step=0.005, format='%.3f',
+                          help='Referências: 17,6% em 2016, 23,1% em 2020 e 21,7% em 2024.')
+        # A abstenção anterior do município é comparada ao nível nacional da última eleição (2024)
+        entrada['abstencao_anterior_relativa'] = anterior - artefato_multi['nivel_ultima_eleicao']
+        previsao = artefato_multi['modelo'].predict(entrada[artefato_multi['features']])[0] + nivel
     st.metric('Abstenção esperada', pct(previsao))
-    st.caption(f"Em 80% dos municípios, a abstenção real ficou entre {pct(previsao + artefato['erro_p10'])} e "
-               f"{pct(previsao + artefato['erro_p90'])} para um perfil como este.")
+    st.caption(f"Em 80% dos casos, a abstenção real ficou entre {pct(previsao + escolhido['erro_p10'])} e "
+               f"{pct(previsao + escolhido['erro_p90'])} para um perfil como este.")
 
     media_uf = prefeito[prefeito['uf'] == uf_sim]
     st.caption(f"Para comparação: a abstenção em {uf_sim} foi de "

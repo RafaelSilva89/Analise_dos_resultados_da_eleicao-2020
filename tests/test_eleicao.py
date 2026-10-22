@@ -2,12 +2,15 @@
 import pandas as pd
 import pytest
 
-from src.dados_externos import corrigir_codigos_ibge, montar_painel, partido_atual, prefeitos_eleitos_final
-from src.eleicao import (COLUNAS, bancada_do_prefeito, carregar_base, classificar_porte, pareto,
-                         prefeitos_eleitos, resumo_partidos, situacao_prefeito, tabela_municipios)
+from src.dados_externos import (corrigir_codigos_ibge, montar_painel, partido_atual, prefeitos_eleitos_final,
+                                resumir_covid)
+from src.eleicao import (COLUNAS, bancada_do_prefeito, base_modelo_relativo, carregar_base, classificar_porte,
+                         pares_vencedores, pareto, partidos_da_coligacao, prefeitos_eleitos, resumo_coligacoes,
+                         resumo_partidos, situacao_prefeito, tabela_municipios)
 
 
-def candidato(codigo, cargo, partido, eleito, vagas=1, comparecimento=900, abstencoes=100, municipio=None):
+def candidato(codigo, cargo, partido, eleito, vagas=1, comparecimento=900, abstencoes=100, municipio=None,
+              coligacao=None):
     """Uma linha no formato da base original do TSE (nomes de colunas em inglês)."""
     return {'uf': 'SP', 'type_id': 11 if cargo == 'prefeito' else 13, 'codigo_tse': codigo,
             'nome_municipio': municipio or f'CIDADE {codigo}', 'capital': 0, 'codigo_ibge': 3500000 + codigo,
@@ -15,7 +18,7 @@ def candidato(codigo, cargo, partido, eleito, vagas=1, comparecimento=900, abste
             'absentees': abstencoes, 'nominal_votes': 800, 'blank_votes': 50, 'total_null_votes': 50,
             'null_votes': 50, 'technical_null_votes': 0, 'valid_votes': 800, 'nulled_votes': 0,
             'judically_nulled_votes': 0, 'vote_count': comparecimento, 'candidate_number': 10,
-            'candidate_name': 'FULANO', 'candidate_coligation': partido, 'candidate_vice_name': '',
+            'candidate_name': 'FULANO', 'candidate_coligation': coligacao or partido, 'candidate_vice_name': '',
             'candidate_vote_destination': 'Válido', 'candidate_vote_count': 100, 'legend_votes': None,
             'job': cargo, 'main_party': partido}
 
@@ -25,7 +28,7 @@ def base(tmp_path):
     """4 municípios: 1 com prefeito eleito, 1 com 2º turno, 1 sem resultado (sub judice) e 1 sem votos (adiada)."""
     linhas = [
         # Município 1: prefeito do MDB eleito; Câmara com 3 cadeiras (MDB 2, PT 1)
-        candidato(1, 'prefeito', 'MDB', True), candidato(1, 'prefeito', 'PT', False),
+        candidato(1, 'prefeito', 'MDB', True, coligacao='MDB - MDB / PP** / PSD'), candidato(1, 'prefeito', 'PT', False),
         candidato(1, 'vereador', 'MDB', True, vagas=3), candidato(1, 'vereador', 'MDB', True, vagas=3),
         candidato(1, 'vereador', 'PT', True, vagas=3), candidato(1, 'vereador', 'PSD', False, vagas=3),
         # Município 2: dois candidatos marcados = 2º turno
@@ -138,3 +141,45 @@ def test_corrigir_codigos_ibge_troca_so_codigos_errados():
     corrigida, trocados = corrigir_codigos_ibge(chave, ibge)
     assert corrigida['codigo_ibge'].tolist() == [1, 2, 3]
     assert trocados['municipio'].tolist() == ['LAJE', 'LAJEDÃO']
+
+
+def test_partidos_da_coligacao():
+    assert partidos_da_coligacao('PP - PP / PL** / PTC') == ['PP', 'PL', 'PTC']
+    assert partidos_da_coligacao('PC do B - PC do B / PT') == ['PC do B', 'PT']
+    assert partidos_da_coligacao('PT') == ['PT']
+
+
+def test_resumo_coligacoes_usa_so_municipios_com_resultado_no_1o_turno(base):
+    coligacoes = resumo_coligacoes(base)
+    assert coligacoes['codigo_tse'].unique().tolist() == [1]  # 2º turno, sub judice e adiada ficam de fora
+    vencedor = coligacoes[coligacoes['eleito']].iloc[0]
+    assert vencedor['n_partidos'] == 3
+    assert vencedor['chance_esperada'] == pytest.approx(0.5)
+    assert pares_vencedores(coligacoes).to_dict() == {'MDB + PP': 1, 'MDB + PSD': 1, 'PP + PSD': 1}
+
+
+def test_resumir_covid_acumula_ate_a_vespera_e_calcula_14_dias():
+    covid = pd.DataFrame({
+        'date': ['2020-10-01', '2020-11-01', '2020-11-14', '2020-11-20', '2020-11-14'],
+        'ibgeID': [3500001, 3500001, 3500001, 3500001, 0],  # 0 = total nacional, deve ser ignorado
+        'totalCases_per_100k_inhabitants': [100.0, 150.0, 180.0, 999.0, 5.0],
+        'deaths_per_100k_inhabitants': [1.0, 2.0, 3.0, 99.0, 0.0],
+    })
+    resumo = resumir_covid(covid, '2020-11-14').set_index('codigo_ibge')
+    assert resumo.index.tolist() == [3500001]
+    assert resumo.loc[3500001, 'casos_100k'] == 180       # depois da eleição não conta
+    assert resumo.loc[3500001, 'obitos_100k'] == 3
+    assert resumo.loc[3500001, 'casos_14d_100k'] == 180 - 100  # acumulado em 31/10 = valor de 01/10
+
+
+def test_base_modelo_relativo_desconta_o_nivel_nacional():
+    painel = pd.DataFrame({
+        'ano': [2020, 2020], 'codigo_tse': [1, 2], 'municipio': ['A', 'B'], 'uf': ['SP', 'SP'], 'capital': [0, 0],
+        'aptos': [1000, 10000], 'pib_per_capita': [10000, 20000], 'candidatos_prefeito': [2, 3],
+        'candidatos_por_vaga_vereador': [3, 5], 'pct_urbana': [0.5, 0.9], 'pct_idosos': [0.2, 0.1],
+        'eleitores_por_habitante': [0.8, 0.7], 'abstencao': [0.20, 0.30], 'abstencao_anterior': [0.15, 0.20],
+        'abstencao_nacional': [0.25, 0.25], 'abstencao_nacional_anterior': [0.18, 0.18],
+    })
+    base = base_modelo_relativo(painel, [2020])
+    assert base['abstencao_relativa'].tolist() == pytest.approx([-0.05, 0.05])
+    assert base['abstencao_anterior_relativa'].tolist() == pytest.approx([-0.03, 0.02])

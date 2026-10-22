@@ -1,4 +1,4 @@
-"""Download e resumo de dados públicos complementares: TSE (eleições 2016, 2020 e 2024) e IBGE (SIDRA).
+"""Download e resumo de dados públicos complementares: TSE (eleições 2012 a 2024), IBGE (SIDRA) e Covid-19.
 
 Os arquivos brutos do TSE são grandes (até 140 MB cada). Por isso, o notebook baixa, resume por município
 e salva só as tabelas resumidas em Datasets/ (algumas centenas de KB), usadas nas análises e no app.
@@ -15,6 +15,9 @@ import pandas as pd
 URL_TSE = 'https://cdn.tse.jus.br/estatistica/sead/odsele/{tipo}/{tipo}_{ano}.zip'
 URL_SIDRA = 'https://apisidra.ibge.gov.br/values/{consulta}'
 ANOS = [2016, 2020, 2024]
+ANO_ANTERIOR_A_2016 = 2012  # só a abstenção, para criar a "abstenção anterior" das linhas de 2016
+URL_COVID = 'https://raw.githubusercontent.com/wcota/covid19br/master/cases-brazil-cities-time_2020.csv.gz'
+VESPERA_ELEICAO_2020 = '2020-11-14'  # 1º turno em 15/11/2020
 ELEICAO_ORDINARIA = 2  # o TSE também publica eleições suplementares, que ficam de fora
 
 SITUACOES_ELEITO = ['ELEITO', 'ELEITO POR QP', 'ELEITO POR MÉDIA']
@@ -160,6 +163,40 @@ def baixar_ibge():
     return ibge.reset_index()
 
 
+# ----------------------------------------------------------------------------------- Covid-19
+def resumir_covid(covid, data_limite=VESPERA_ELEICAO_2020, dias_recentes=14):
+    """Casos e óbitos acumulados por 100 mil habitantes até `data_limite` e casos dos últimos `dias_recentes` dias.
+
+    covid: série diária acumulada por município (colunas date, ibgeID, totalCases_per_100k_inhabitants,
+    deaths_per_100k_inhabitants), no formato do repositório wcota/covid19br.
+    Municípios sem nenhum caso até a data não aparecem na série: ficam com zero no painel.
+    """
+    covid = covid[covid['ibgeID'] > 1_000_000].copy()  # tira totais nacionais/estaduais e casos sem município
+    covid['date'] = pd.to_datetime(covid['date'])
+    limite = pd.Timestamp(data_limite)
+
+    def acumulado_ate(data):
+        ate = covid[covid['date'] <= data].sort_values('date').groupby('ibgeID').last()
+        return ate[['totalCases_per_100k_inhabitants', 'deaths_per_100k_inhabitants']]
+
+    agora = acumulado_ate(limite)
+    antes = acumulado_ate(limite - pd.Timedelta(days=dias_recentes)).reindex(agora.index, fill_value=0)
+    resumo = pd.DataFrame({
+        'casos_100k': agora['totalCases_per_100k_inhabitants'],
+        'obitos_100k': agora['deaths_per_100k_inhabitants'],
+        # correções retroativas da série podem deixar a diferença negativa: nesses casos, zero
+        'casos_14d_100k': (agora['totalCases_per_100k_inhabitants']
+                           - antes['totalCases_per_100k_inhabitants']).clip(lower=0),
+    })
+    return resumo.rename_axis('codigo_ibge').reset_index()
+
+
+def baixar_covid(url=URL_COVID, data_limite=VESPERA_ELEICAO_2020):
+    """Baixa a série de Covid-19 por município (2020) e resume até a véspera do 1º turno."""
+    colunas = ['date', 'ibgeID', 'totalCases_per_100k_inhabitants', 'deaths_per_100k_inhabitants']
+    return resumir_covid(pd.read_csv(url, usecols=colunas), data_limite)
+
+
 # ----------------------------------------------------------------------------------- Painel
 def normalizar_nome(nome):
     """'Santa Bárbara d'Oeste' -> 'SANTABARBARADOESTE' (sem acentos, espaços e pontuação)."""
@@ -185,45 +222,60 @@ def corrigir_codigos_ibge(chave, ibge):
     return chave, chave.loc[trocado, ['uf', 'municipio', 'codigo_ibge']]
 
 
-def montar_painel(votacao, candidatos, ibge, municipios_2020):
-    """Une TSE + IBGE em uma tabela com 1 linha por município e eleição (2016, 2020, 2024).
+def montar_painel(votacao, candidatos, ibge, municipios_2020, covid=None):
+    """Une TSE + IBGE (+ Covid) em uma tabela com 1 linha por município e eleição (2016, 2020, 2024).
 
+    votacao: pode trazer também 2012, usado só para a abstenção anterior das linhas de 2016.
     municipios_2020: base de 2020 (codigo_tse, codigo_ibge, municipio e capital), usada para ligar TSE e IBGE.
+    covid: resumo de `resumir_covid`, ligado só às linhas de 2020 (municípios sem casos ficam com zero).
     Cria a abstenção da eleição anterior e o número de eleitores por habitante.
     """
+    votacao = votacao[votacao['aptos'] > 0]
+    anterior = votacao.assign(ano=votacao['ano'] + 4, abstencao_anterior=votacao['abstencoes'] / votacao['aptos'])
+    totais = votacao.groupby('ano')[['abstencoes', 'aptos']].sum()
+    nivel_nacional = totais['abstencoes'] / totais['aptos']
+    votacao = votacao[votacao['ano'].isin(ANOS)]
+
     chave = municipios_2020[['codigo_tse', 'codigo_ibge', 'uf', 'municipio', 'capital']].drop_duplicates('codigo_tse')
     chave, _ = corrigir_codigos_ibge(chave, ibge)
     chave = chave.drop(columns='uf')
     painel = (votacao.merge(candidatos, on=['ano', 'codigo_tse'], how='inner')
               .merge(chave, on='codigo_tse', how='inner')
               .merge(ibge, on='codigo_ibge', how='left'))
-    painel = painel[painel['aptos'] > 0]
     painel['abstencao'] = painel['abstencoes'] / painel['aptos']
     painel['candidatos_por_vaga_vereador'] = painel['candidatos_vereador'] / painel['vagas_vereador']
     populacao_do_ano = np.select([painel['ano'] == ano for ano in ANOS],
                                  [painel[f'populacao_{ano}'] for ano in ANOS])
     painel['eleitores_por_habitante'] = painel['aptos'] / populacao_do_ano
 
-    anterior = painel[['ano', 'codigo_tse', 'abstencao']].assign(ano=lambda t: t['ano'] + 4)
-    painel = painel.merge(anterior.rename(columns={'abstencao': 'abstencao_anterior'}),
-                          on=['ano', 'codigo_tse'], how='left')
+    painel = painel.merge(anterior[['ano', 'codigo_tse', 'abstencao_anterior']], on=['ano', 'codigo_tse'], how='left')
+    # Nível nacional de cada eleição: o modelo multi-eleição aprende a diferença de cada município para ele
+    painel['abstencao_nacional'] = painel['ano'].map(nivel_nacional)
+    painel['abstencao_nacional_anterior'] = (painel['ano'] - 4).map(nivel_nacional)
+    if covid is not None:
+        painel = painel.merge(covid, on='codigo_ibge', how='left')
+        colunas_covid = [c for c in covid.columns if c != 'codigo_ibge']
+        eh_2020 = painel['ano'] == 2020
+        painel.loc[eh_2020, colunas_covid] = painel.loc[eh_2020, colunas_covid].fillna(0)
+        painel.loc[~eh_2020, colunas_covid] = np.nan
     return (painel.drop(columns=[f'populacao_{ano}' for ano in ANOS] + ['nome_ibge', 'uf_ibge'])
             .sort_values(['ano', 'codigo_tse']))
 
 
 def atualizar_bases(municipios_2020, pasta_bruta, pasta_saida):
-    """Baixa TSE (2016, 2020, 2024) e IBGE, resume e salva 3 CSVs pequenos em `pasta_saida`.
+    """Baixa TSE (2012 a 2024), IBGE e Covid-19, resume e salva 3 CSVs pequenos em `pasta_saida`.
 
     Os arquivos brutos do TSE (cerca de 300 MB) ficam em `pasta_bruta`, que não vai para o repositório.
     """
     pasta_saida = Path(pasta_saida)
-    votacao = pd.concat(resumir_votacao(baixar_tse('detalhe_votacao_munzona', ano, pasta_bruta)) for ano in ANOS)
+    votacao = pd.concat(resumir_votacao(baixar_tse('detalhe_votacao_munzona', ano, pasta_bruta))
+                        for ano in [ANO_ANTERIOR_A_2016] + ANOS)
     candidatos = pd.concat(ler_candidatos(baixar_tse('consulta_cand', ano, pasta_bruta)) for ano in ANOS)
     resumo_candidatos = pd.concat(
         resumir_candidatos(candidatos[candidatos['ano'] == ano], baixar_tse('consulta_vagas', ano, pasta_bruta))
         for ano in ANOS)
 
-    montar_painel(votacao, resumo_candidatos, baixar_ibge(), municipios_2020).to_csv(
+    montar_painel(votacao, resumo_candidatos, baixar_ibge(), municipios_2020, covid=baixar_covid()).to_csv(
         pasta_saida / 'painel_municipios_2016_2024.csv', index=False)
     prefeitos_eleitos_final(candidatos).to_csv(pasta_saida / 'prefeitos_eleitos_2016_2024.csv', index=False)
     vereadores_por_partido(candidatos).to_csv(pasta_saida / 'vereadores_partido_uf_2016_2024.csv', index=False)

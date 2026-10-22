@@ -1,4 +1,6 @@
 """Leitura e indicadores da base do 1º turno das eleições municipais de 2020 (TSE)."""
+from itertools import combinations
+
 import numpy as np
 import pandas as pd
 
@@ -56,6 +58,10 @@ FEATURES_ELEICAO = ['uf', 'capital', 'log_aptos', 'candidatos_prefeito', 'candid
 FEATURES_IBGE = ['log_pib_per_capita', 'pct_urbana', 'pct_idosos', 'eleitores_por_habitante']
 FEATURES_HISTORICO = ['abstencao_anterior']
 FEATURES = FEATURES_ELEICAO + FEATURES_IBGE + FEATURES_HISTORICO
+FEATURES_COVID = ['obitos_100k', 'casos_100k', 'casos_14d_100k']  # só existem em 2020
+
+# Modelo multi-eleição: a abstenção anterior entra como diferença para o nível nacional daquela eleição
+FEATURES_RELATIVO = FEATURES_ELEICAO + FEATURES_IBGE + ['abstencao_anterior_relativa']
 
 
 def carregar_base(caminho):
@@ -161,4 +167,56 @@ def base_modelo(painel, ano=2020):
     """
     base = painel[painel['ano'] == ano].set_index('codigo_tse')
     base = base.assign(log_aptos=np.log10(base['aptos']), log_pib_per_capita=np.log10(base['pib_per_capita']))
-    return base[['municipio', 'aptos'] + FEATURES + ['abstencao']]
+    covid = [coluna for coluna in FEATURES_COVID if coluna in base]  # só preenchidas em 2020
+    return base[['municipio', 'aptos'] + FEATURES + covid + ['abstencao']]
+
+
+def base_modelo_relativo(painel, anos):
+    """Base do modelo multi-eleição: 1 linha por município e eleição de `anos`.
+
+    O alvo `abstencao_relativa` é a diferença entre a abstenção do município e a abstenção nacional daquela
+    eleição. Assim, o modelo aprende o que é próprio de cada município, e o nível nacional (que muda com o
+    contexto, como na pandemia) é somado depois, como um cenário.
+    """
+    base = painel[painel['ano'].isin(anos)].copy()
+    base['log_aptos'] = np.log10(base['aptos'])
+    base['log_pib_per_capita'] = np.log10(base['pib_per_capita'])
+    base['abstencao_anterior_relativa'] = base['abstencao_anterior'] - base['abstencao_nacional_anterior']
+    base['abstencao_relativa'] = base['abstencao'] - base['abstencao_nacional']
+    return base[['ano', 'codigo_tse', 'municipio'] + FEATURES_RELATIVO
+                + ['abstencao_nacional', 'abstencao', 'abstencao_relativa']].reset_index(drop=True)
+
+
+# ----------------------------------------------------------------------------------- Coligações
+def partidos_da_coligacao(texto):
+    """'PP - PP / PL** / PTC' -> ['PP', 'PL', 'PTC']; 'PT' -> ['PT'].
+
+    O campo traz o nome da coligação antes de " - " e a lista de partidos depois. Os asteriscos marcam
+    partidos com alguma pendência no registro e são removidos.
+    """
+    composicao = str(texto).split(' - ', 1)[-1]
+    return [partido.strip().strip('*').strip() for partido in composicao.split(' / ') if partido.strip()]
+
+
+def resumo_coligacoes(df):
+    """Uma linha por candidato a prefeito nos municípios com resultado no 1º turno.
+
+    Colunas: nº de partidos na aliança, se venceu, nº de candidatos no município e a chance "esperada"
+    de vitória se todos tivessem a mesma chance (1 ÷ nº de candidatos).
+    """
+    situacao = situacao_prefeito(df)
+    definidos = situacao[situacao == 'Eleito no 1º turno'].index
+    prefeitos = df[(df['cargo'] == 'prefeito') & df['codigo_tse'].isin(definidos)].copy()
+    prefeitos['partidos_alianca'] = prefeitos['coligacao'].map(partidos_da_coligacao)
+    prefeitos['n_partidos'] = prefeitos['partidos_alianca'].str.len()
+    prefeitos['candidatos_no_municipio'] = prefeitos.groupby('codigo_tse')['codigo_tse'].transform('size')
+    prefeitos['chance_esperada'] = 1 / prefeitos['candidatos_no_municipio']
+    return prefeitos[['codigo_tse', 'uf', 'municipio', 'partido', 'partidos_alianca', 'n_partidos',
+                      'candidatos_no_municipio', 'chance_esperada', 'eleito']].reset_index(drop=True)
+
+
+def pares_vencedores(coligacoes, top=10):
+    """Pares de partidos que mais venceram juntos (na mesma aliança vencedora para prefeito)."""
+    vencedoras = coligacoes.loc[coligacoes['eleito'], 'partidos_alianca']
+    pares = pd.Series([' + '.join(sorted(par)) for alianca in vencedoras for par in combinations(set(alianca), 2)])
+    return pares.value_counts().head(top).rename('prefeituras')

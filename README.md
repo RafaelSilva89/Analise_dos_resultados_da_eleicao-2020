@@ -6,17 +6,20 @@
 <img src="Imagens/Capa.png" width="400px">
 </div>
 
-**Python · Pandas · GeoPandas · Scikit-learn · Gradient Boosting · API do IBGE · Pytest · Streamlit · CRISP-DM**
+[![Testes](https://github.com/RafaelSilva89/Analise_dos_resultados_da_eleicao-2020/actions/workflows/testes.yml/badge.svg)](https://github.com/RafaelSilva89/Analise_dos_resultados_da_eleicao-2020/actions/workflows/testes.yml)
+
+**Python · Pandas · GeoPandas · Scikit-learn · Gradient Boosting · API do IBGE · Pytest · GitHub Actions · Streamlit · CRISP-DM**
 
 | 📊 Destaques | |
 |---|---|
-| Base | **518.675 candidaturas** de 2020 em **5.567 municípios** (TSE), mais as eleições de **2016 e 2024** e indicadores do **IBGE** |
+| Base | **518.675 candidaturas** de 2020 em **5.567 municípios** (TSE), mais as eleições de **2012 a 2024**, indicadores do **IBGE** e dados de **Covid-19** |
 | Concentração | **5 partidos** elegeram **57%** dos prefeitos e **48%** dos vereadores em 2020 |
 | Mudança | De 2016 para 2024, o **PSD** virou o maior partido (538 → **886** prefeitos) e o **PSDB** perdeu 2 de cada 3 prefeituras (799 → **271**) |
 | Abstenção | **17,6%** (2016) → **23,1%** (2020, pandemia) → **21,7%** (2024); de **13,9%** nas cidades pequenas a **25,8%** nas grandes |
-| Modelo | Estima a abstenção esperada de cada município com erro médio de **2,0 pontos percentuais** (explica **80%** das diferenças) e foi testado **fora do tempo**, em 2024 |
+| Modelo | Estima a abstenção esperada de cada município com erro médio de **2,0 pontos percentuais** (explica **80%** das diferenças). Um modelo **multi-eleição** acerta 2024 com erro de **2,3 p.p.**, contra 3,4 do modelo de uma eleição só |
+| Coligações | Quem concorreu sozinho a prefeito venceu **9%** das vezes; com 8 ou mais partidos na aliança, **67%** |
 | Qualidade dos dados | A v2 corrigiu **erros da base original**: colunas com o nome errado, **114 candidatos do 2º turno** contados como eleitos e **7 códigos IBGE trocados** |
-| Entrega | Notebook CRISP-DM, **12 testes automatizados** e **app Streamlit** com mapa interativo, consulta por município, evolução 2016–2024 e simulador |
+| Entrega | Notebook CRISP-DM, **16 testes automatizados** (rodando no GitHub Actions) e **app Streamlit** com mapa interativo, consulta por município, evolução 2016–2024 e simulador para a próxima eleição |
 
 ---
 
@@ -51,7 +54,7 @@ São centenas de milhares de registros que, bem analisados, respondem perguntas 
 
 > **Perguntas de negócio:**
 > 1. Quais partidos mais elegeram, e o quanto esse resultado é **concentrado**?
-> 2. Quais partidos foram mais **eficientes** (elegeram mais por candidato lançado)?
+> 2. Quais partidos foram mais **eficientes** (elegeram mais por candidato lançado)? **Alianças** maiores vencem mais?
 > 3. Como **abstenção**, votos **brancos e nulos** e **concorrência** mudam com o tamanho da cidade, o estado e o perfil da população?
 > 4. O partido que elege o prefeito costuma ter a **maior bancada** na Câmara Municipal?
 > 5. Qual **abstenção é esperada** para um município, e quais cidades fugiram muito desse padrão?
@@ -77,11 +80,11 @@ O dicionário completo, com as 29 colunas, está no notebook (Fase 02, item 2.1)
 
 | Arquivo | Fonte | Conteúdo |
 |---|---|---|
-| `painel_municipios_2016_2024.csv` | TSE + IBGE | 1 linha por município e eleição: eleitores, abstenção, candidatos, vagas, PIB per capita, % urbana, % de idosos |
+| `painel_municipios_2016_2024.csv` | TSE + IBGE + Covid | 1 linha por município e eleição: eleitores, abstenção (e a da eleição anterior, desde 2012), nível nacional, candidatos, vagas, PIB per capita, % urbana, % de idosos e, em 2020, casos e óbitos de Covid |
 | `prefeitos_eleitos_2016_2024.csv` | TSE | Prefeito eleito em cada município no **resultado final** (2º turno e julgamentos) |
 | `vereadores_partido_uf_2016_2024.csv` | TSE | Candidatos e eleitos a vereador por eleição, estado e partido |
 
-Os dados do IBGE vêm da API do SIDRA: população estimada (2016, 2020, 2024), PIB dos municípios (2020), população urbana (Censo 2010) e população com 60 anos ou mais (Censo 2022). O arquivo `Datasets/uf.json` tem o contorno dos estados, usado nos mapas.
+Os dados do IBGE vêm da API do SIDRA: população estimada (2016, 2020, 2024), PIB dos municípios (2020), população urbana (Censo 2010) e população com 60 anos ou mais (Censo 2022). Os dados de Covid-19 por município vêm do repositório público [wcota/covid19br](https://github.com/wcota/covid19br), até a véspera do 1º turno (14/11/2020). O arquivo `Datasets/uf.json` tem o contorno dos estados, usado nos mapas.
 
 ## 4. Estrutura do projeto
 
@@ -97,16 +100,18 @@ Analise_dos_resultados_da_eleicao-2020/
 │   └── eleitos.csv                            # 2020: candidatos eleitos (gerada no notebook)
 ├── Imagens/                                   # gráficos gerados pelos notebooks
 ├── Model/
-│   └── modelo_abstencao.pkl                   # pipeline + faixa de erro (usado pelo app)
+│   ├── modelo_abstencao.pkl                   # modelo de 2020 + faixa de erro (usado pelo app)
+│   └── modelo_abstencao_multieleicao.pkl      # modelo multi-eleição para a próxima eleição
 ├── Notebooks/
 │   ├── Análise dos resultados da eleição - 2020.ipynb        # versão original
 │   └── Análise dos resultados da eleição - 2020 - v2.ipynb   # versão reorganizada (CRISP-DM)
 ├── src/
 │   ├── eleicao.py                             # leitura, tabelas por município/partido e base do modelo
-│   ├── dados_externos.py                      # download e resumo de TSE (2016–2024) e IBGE
+│   ├── dados_externos.py                      # download e resumo de TSE (2012–2024), IBGE e Covid-19
 │   └── graficos.py                            # funções de gráficos
 ├── tests/
-│   └── test_eleicao.py                        # 12 testes automatizados (pytest)
+│   └── test_eleicao.py                        # 16 testes automatizados (pytest)
+├── .github/workflows/testes.yml               # roda os testes a cada push (GitHub Actions)
 ├── app.py                                     # app Streamlit
 ├── pytest.ini
 ├── requirements.txt
@@ -138,9 +143,9 @@ streamlit run app.py
 | Fase | O que foi feito |
 |---|---|
 | **01. Entendimento do negócio** | Definição das 6 perguntas e do público |
-| **02. Preparação dos dados** | Correção do significado das colunas e dos códigos IBGE, tabelas por município e partido, análise exploratória com 12 hipóteses |
+| **02. Preparação dos dados** | Correção do significado das colunas e dos códigos IBGE, tabelas por município e partido, análise exploratória com 14 hipóteses |
 | **03. Modelagem** | Seleção de variáveis (eleição, IBGE, histórico), comparação de 4 modelos de regressão, ajuste fino, faixa de erro e calibração |
-| **04. Avaliação** | Erro no teste, municípios fora do padrão, variáveis mais importantes e **teste fora do tempo (2024)** |
+| **04. Avaliação** | Erro no teste, municípios fora do padrão, variáveis mais importantes, **teste fora do tempo (2024)** e **modelo multi-eleição** |
 | **05. Implantação** | Tabelas e modelo salvos, simulação de cenários e app Streamlit |
 
 ## 7. Principais descobertas da análise exploratória
@@ -191,6 +196,14 @@ Em média, **29%** dos candidatos a prefeito venceram no 1º turno. O **PP** ele
 
 A abstenção no Brasil foi de **17,6%** em 2016, subiu para **23,1%** em 2020 e caiu só para **21,7%** em 2024. Nas cidades grandes, ela praticamente não voltou.
 
+### H14: alianças maiores vencem mais (mas não só por causa da aliança)
+
+<div align="center">
+<img src="Imagens/Coligacoes tamanho da alianca.png" width="750px">
+</div>
+
+Em 2020, as coligações eram permitidas só para prefeito. Quem concorreu **sozinho** venceu **9%** das vezes, bem abaixo da chance esperada (26%, se todos tivessem a mesma chance). Com **8 ou mais partidos**, a vitória chegou a **67%**. Os pares que mais venceram juntos foram **MDB + PP** (534 prefeituras) e **PP + PSD** (476). **Cautela:** as alianças grandes se formam em torno de quem já é favorito, então parte desse efeito é do candidato, não da aliança.
+
 ### H7: o partido do prefeito tem a maior bancada, mas não a maioria
 
 Em **67%** dos municípios, o partido do prefeito eleito ficou com a **maior bancada** da Câmara (88,6% nas cidades com mais de 200 mil eleitores). Mas a mediana é de só **33% das cadeiras**: o prefeito quase sempre depende de **alianças**.
@@ -203,6 +216,10 @@ Em **67%** dos municípios, o partido do prefeito eleito ficou com a **maior ban
 
 A abstenção vai de **15,4%** no Piauí a **28,1%** no Rio de Janeiro (**Nordeste 18,5%**, **Sudeste 26,3%**). Com os dados do IBGE, a **urbanização** é o indicador mais ligado à abstenção (de 13,5% nos municípios mais rurais a 22,6% nos mais urbanos); o efeito da renda é pequeno.
 
+### H13: a Covid local quase não explica a abstenção
+
+A correlação entre os óbitos de Covid por 100 mil habitantes até a véspera da eleição e a abstenção foi de só **0,17**, e os dados de Covid não melhoraram o modelo. A pandemia aumentou a abstenção **no país todo** (H11), mas os municípios mais atingidos não faltaram muito mais do que os outros: o efeito foi **geral**.
+
 ## 8. Construção do modelo de abstenção
 
 **Pergunta:** *qual abstenção é esperada para um município, dado o seu perfil?* Com essa referência, dá para encontrar cidades onde faltou **muito mais (ou muito menos) gente do que o esperado** e investigar o motivo.
@@ -213,7 +230,7 @@ A abstenção vai de **15,4%** no Piauí a **28,1%** no Rio de Janeiro (**Nordes
    - **histórico:** abstenção do município na eleição anterior (2016).
 2. **Sem "colar a resposta":** comparecimento, brancos e nulos ficaram de fora, pois são **resultados da própria votação** (*vazamento de dados*).
 3. **Treino e teste:** 80% dos municípios para treinar e comparar modelos com **validação cruzada**, 20% guardados para o teste final.
-4. **Seleção de variáveis:** cada grupo novo foi testado separadamente. O IBGE reduziu o erro de 2,77 para 2,62 p.p.; a abstenção anterior, para **2,02 p.p.**
+4. **Seleção de variáveis:** cada grupo novo foi testado separadamente. O IBGE reduziu o erro de 2,77 para 2,62 p.p.; a abstenção anterior, para **2,02 p.p.** A Covid não ajudou (2,03 p.p.) e ficou de fora.
 5. **4 modelos comparados**, do mais simples ao mais sofisticado, e **ajuste fino** do melhor (**HistGradientBoosting**):
 
 <div align="center">
@@ -226,11 +243,12 @@ A abstenção vai de **15,4%** no Piauí a **28,1%** no Rio de Janeiro (**Nordes
 
 ## 9. Resultado do modelo
 
-| Métrica | Prever sempre a média | Modelo final (teste 2020) | Modelo aplicado a 2024 |
-|---|---|---|---|
-| Erro médio (MAE) | 4,89 p.p. | **2,02 p.p.** | 3,42 p.p. (2,50 descontando o viés) |
-| R² (quanto das diferenças é explicado) | 0% | **80%** | 40% (66% descontando o viés) |
-| Ordenação dos municípios (Spearman) | — | **0,89** | **0,86** |
+| Métrica | Prever sempre a média | Modelo final (teste 2020) | Modelo de 2020 aplicado a 2024 | **Modelo multi-eleição em 2024** |
+|---|---|---|---|---|
+| Erro médio (MAE) | 4,89 p.p. | **2,02 p.p.** | 3,42 p.p. | **2,27 p.p.** |
+| R² (quanto das diferenças é explicado) | 0% | **80%** | 40% | **73%** |
+| Viés médio | — | +0,1 p.p. | +2,8 p.p. | −0,5 p.p. |
+| Ordenação dos municípios (Spearman) | — | **0,89** | 0,86 | 0,85 |
 
 **Em linguagem de negócio:** se o modelo prevê 20% de abstenção para uma cidade, o erro típico é de 2 pontos para cima ou para baixo, e em 80% dos casos a abstenção real fica entre 16,8% e 23,2%. Ele é **bem calibrado** em todas as faixas.
 
@@ -240,10 +258,15 @@ A abstenção vai de **15,4%** no Piauí a **28,1%** no Rio de Janeiro (**Nordes
 
 A **abstenção da eleição anterior** é, de longe, o que mais explica a abstenção, seguida do **tamanho** e do **estado**: a abstenção de uma cidade é muito estável ao longo do tempo.
 
-**Teste fora do tempo:** aplicado à eleição de **2024**, o modelo de 2020 continuou **ordenando bem** os municípios (Spearman de 0,86), mas **superestimou o nível** em 2,8 p.p. Ele aprendeu a relação 2016 → 2020, quando a abstenção subiu com a pandemia; de 2020 para 2024 ela caiu. **Lição:** o modelo é ótimo para **comparar municípios** dentro de uma eleição; para prever o **nível nacional** de uma eleição futura, é preciso informar o contexto.
+**Teste fora do tempo e modelo multi-eleição:** aplicado à eleição de **2024**, o modelo de 2020 continuou **ordenando bem** os municípios, mas **superestimou o nível** em 2,8 p.p.: ele aprendeu a subida da pandemia (2016 → 2020), e de 2020 para 2024 a abstenção caiu. A solução foi um **modelo multi-eleição**:
+- treinado com **2016 e 2020** juntos;
+- prevê a **diferença de cada município para o nível nacional**;
+- o nível nacional entra depois, como **cenário**.
+
+Em 2024, o erro caiu de 3,42 para **2,27 p.p.** Esse é o modelo usado no app para simular a **próxima eleição**.
 
 <div align="center">
-<img src="Imagens/Teste fora do tempo 2024.png" width="800px">
+<img src="Imagens/Modelo multi-eleicao 2024.png" width="800px">
 </div>
 
 **Municípios fora do padrão em 2020:** em **Ivatuba (PR)**, a abstenção quase dobrou (12,9% → 24,1%) e em **Jataí (GO)** foi de 15,7% para 31,7%. No outro extremo, **Fronteira dos Vales (MG)** teve 8,9%, contra 22,0% esperados.
@@ -254,7 +277,7 @@ O app tem 4 abas:
 1. **📊 Painel:** escolha o Brasil ou um estado e veja eleitores, abstenção, brancos/nulos, um **mapa interativo** (abstenção, brancos/nulos ou partido com mais prefeitos) e os partidos que mais elegeram.
 2. **🏙️ Município:** escolha uma cidade e veja o prefeito eleito (ou o resultado do 2º turno e do julgamento), a composição da Câmara, a abstenção **real × esperada** e o histórico de 2016, 2020 e 2024.
 3. **📈 2016 → 2024:** prefeitos eleitos por partido nas 3 eleições e a abstenção de cada uma.
-4. **🔮 Simulador:** informe o perfil de um município e receba a **abstenção esperada** com a faixa de erro.
+4. **🔮 Simulador:** informe o perfil de um município e receba a **abstenção esperada** com a faixa de erro, pelo modelo de 2020 ou pelo **modelo multi-eleição**, informando a abstenção nacional esperada para a próxima eleição.
 
 ```bash
 streamlit run app.py
@@ -273,10 +296,10 @@ A versão original foi mantida em `Notebooks/` para mostrar a evolução.
 | 3 | Estatísticas calculadas sobre as linhas de candidatos ("comparecimento de 13,19%", "média de 8.581.663 votos nominais") | Cada município aparecia uma vez **por candidato** | Tabela com **1 linha por município**: abstenção real de **23,1%** |
 | 4 | "Quanto mais candidatos, mais eleitos" (correlação de 0,9) | A correlação refletia só o **tamanho** dos partidos | **Taxa de sucesso** por partido (PP 46% x PT 15%) |
 | 5 | Mapas com marcadores na capital mostrando o total do estado | Difícil comparar estados de tamanhos diferentes | Mapa de **abstenção (%)** por estado e mapa interativo no app |
-| 6 | Só 2020 e só dados do TSE | Sem comparação nem contexto socioeconômico | Eleições de **2016 e 2024** e indicadores do **IBGE** |
+| 6 | Só 2020 e só dados do TSE | Sem comparação nem contexto socioeconômico | Eleições de **2012 a 2024**, indicadores do **IBGE**, dados de **Covid** e análise de **coligações** |
 | 7 | — | `codigo_ibge` trocado em 7 municípios na base | Correção automática comparando os nomes, com teste |
-| 8 | Só análise descritiva | — | **Modelo de abstenção esperada**, com teste fora do tempo |
-| 9 | Caminho `Dataset/` no código | A pasta se chama `Datasets/`: o notebook não rodava | Caminhos corrigidos, funções em `src/` e **12 testes** com `pytest` |
+| 8 | Só análise descritiva | — | **Modelo de abstenção esperada**, com teste fora do tempo, e **modelo multi-eleição** para a próxima eleição |
+| 9 | Caminho `Dataset/` no código | A pasta se chama `Datasets/`: o notebook não rodava | Caminhos corrigidos, funções em `src/` e **16 testes** com `pytest` rodando no **GitHub Actions** |
 
 ## 12. Insights
 
@@ -288,20 +311,24 @@ A versão original foi mantida em `Notebooks/` para mostrar a evolução.
 6. **A abstenção subiu na pandemia e não voltou em 2024**, principalmente nas cidades grandes.
 7. **O prefeito quase nunca tem maioria própria** na Câmara: a mediana é de 33% das cadeiras.
 8. **A abstenção de uma cidade é muito estável:** com o histórico, o tamanho, o estado e o IBGE, o modelo explica 80% das diferenças entre municípios.
-9. **Um bom modelo para comparar municípios não prevê sozinho o nível de uma nova eleição:** em 2024, ele ordenou bem as cidades, mas errou o patamar nacional.
+9. **Separar o município do contexto nacional melhora a previsão:** o modelo de uma eleição errou o patamar de 2024; o multi-eleição reduziu o erro de 3,4 para 2,3 p.p.
+10. **Alianças importam:** sozinho, 9% de vitórias; com 8 ou mais partidos, 67% (em parte porque as alianças se formam em torno dos favoritos).
+11. **A Covid local quase não explica a abstenção entre municípios:** o efeito da pandemia foi geral.
 
 ## 13. Limites
 
 - **Resultado final parcial:** dos 104 municípios sub judice, 51 tiveram o prefeito definido em eleição suplementar, que não entra nesta base.
 - **Indicadores do IBGE de anos diferentes:** a urbanização é do Censo 2010 (o mais recente com essa divisão) e a idade, do Censo 2022.
-- **Sem dados de Covid e escolaridade**, que provavelmente explicam parte dos 20% que o modelo não explica.
+- **Sem dados de escolaridade e de distância até as seções**, que provavelmente explicam parte dos 20% que o modelo não explica.
+- **Nível nacional como cenário:** o modelo multi-eleição precisa que se informe a abstenção nacional esperada; ele não a prevê.
+- **Coligações:** a análise mostra associação, não causa (alianças se formam em torno dos favoritos).
 - **Fusões de partidos:** para comparar 2016 e 2024, partidos que se fundiram foram somados com o nome atual. Isso é uma simplificação: parte dos políticos mudou de partido nas fusões.
 
 ## 14. Próximos passos
 
-1. **Treinar com 2016→2020 e 2020→2024 juntos**, com uma variável de contexto nacional, para que o modelo aprenda a mudança de nível entre eleições.
-2. **Acrescentar dados de Covid e de escolaridade** por município.
-3. **Analisar coligações** para prefeito: quais alianças mais elegeram?
+1. **Prever o nível nacional** da próxima eleição (série histórica desde 2000 e indicadores de interesse), em vez de tratá-lo como cenário.
+2. **Acrescentar escolaridade** (Censo 2022) e a **distância média até as seções eleitorais**.
+3. **Medir o efeito causal das alianças**, comparando candidatos parecidos com e sem aliança.
 4. **Estudar o recadastramento biométrico**, que cancelou títulos e pode explicar parte das mudanças de abstenção.
 5. **Publicar o app** no Streamlit Community Cloud e gravar um GIF para este README.
 
