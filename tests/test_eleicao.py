@@ -183,3 +183,19 @@ def test_base_modelo_relativo_desconta_o_nivel_nacional():
     base = base_modelo_relativo(painel, [2020])
     assert base['abstencao_relativa'].tolist() == pytest.approx([-0.05, 0.05])
     assert base['abstencao_anterior_relativa'].tolist() == pytest.approx([-0.03, 0.02])
+
+
+def test_selecao_features_ordena_e_seleciona_k_colunas():
+    import numpy as np
+    from src.selecao import importancia_random_forest, selecao_features
+
+    gerador = np.random.default_rng(0)
+    X = pd.DataFrame({'sinal': gerador.normal(size=300), 'ruido_1': gerador.normal(size=300),
+                      'ruido_2': gerador.normal(size=300)})
+    y = 3 * X['sinal'] + gerador.normal(scale=0.1, size=300)
+
+    ranking, seletor = selecao_features(X, y, k=1)
+    assert ranking['feature'].iloc[0] == 'sinal'
+    assert ranking['score'].is_monotonic_decreasing
+    assert seletor.transform(X).shape == (300, 1)
+    assert importancia_random_forest(X, y).index[0] == 'sinal'

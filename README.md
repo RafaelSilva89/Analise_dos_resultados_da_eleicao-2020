@@ -19,7 +19,7 @@
 | Modelo | Estima a abstenção esperada de cada município com erro médio de **2,0 pontos percentuais** (explica **80%** das diferenças). Um modelo **multi-eleição** acerta 2024 com erro de **2,3 p.p.**, contra 3,4 do modelo de uma eleição só |
 | Coligações | Quem concorreu sozinho a prefeito venceu **9%** das vezes; com 8 ou mais partidos na aliança, **67%** |
 | Qualidade dos dados | A v2 corrigiu **erros da base original**: colunas com o nome errado, **114 candidatos do 2º turno** contados como eleitos e **7 códigos IBGE trocados** |
-| Entrega | Notebook CRISP-DM, **16 testes automatizados** (rodando no GitHub Actions) e **app Streamlit** com mapa interativo, consulta por município, evolução 2016–2024 e simulador para a próxima eleição |
+| Entrega | Notebook CRISP-DM, **17 testes automatizados** (rodando no GitHub Actions) e **app Streamlit** com mapa interativo, consulta por município, evolução 2016–2024 e simulador para a próxima eleição |
 
 ---
 
@@ -108,9 +108,10 @@ Analise_dos_resultados_da_eleicao-2020/
 ├── src/
 │   ├── eleicao.py                             # leitura, tabelas por município/partido e base do modelo
 │   ├── dados_externos.py                      # download e resumo de TSE (2012–2024), IBGE e Covid-19
+│   ├── selecao.py                             # seleção de variáveis (Random Forest + Informação Mútua)
 │   └── graficos.py                            # funções de gráficos
 ├── tests/
-│   └── test_eleicao.py                        # 16 testes automatizados (pytest)
+│   └── test_eleicao.py                        # 17 testes automatizados (pytest)
 ├── .github/workflows/testes.yml               # roda os testes a cada push (GitHub Actions)
 ├── app.py                                     # app Streamlit
 ├── pytest.ini
@@ -230,7 +231,7 @@ A correlação entre os óbitos de Covid por 100 mil habitantes até a véspera 
    - **histórico:** abstenção do município na eleição anterior (2016).
 2. **Sem "colar a resposta":** comparecimento, brancos e nulos ficaram de fora, pois são **resultados da própria votação** (*vazamento de dados*).
 3. **Treino e teste:** 80% dos municípios para treinar e comparar modelos com **validação cruzada**, 20% guardados para o teste final.
-4. **Seleção de variáveis:** cada grupo novo foi testado separadamente. O IBGE reduziu o erro de 2,77 para 2,62 p.p.; a abstenção anterior, para **2,02 p.p.** A Covid não ajudou (2,03 p.p.) e ficou de fora.
+4. **Seleção de variáveis:** a relevância de cada coluna foi medida por **Random Forest** ("quais perguntas o modelo mais usou") e por **Informação Mútua** ("quanto a variável, sozinha, conta sobre a abstenção"). Os dois apontam a **abstenção anterior**, o **tamanho do município** e a **concorrência para vereador** como as mais relevantes. Como confirmação, cada grupo novo foi testado separadamente. O IBGE reduziu o erro de 2,77 para 2,62 p.p.; a abstenção anterior, para **2,02 p.p.** A Covid não ajudou (2,03 p.p.) e ficou de fora.
 5. **4 modelos comparados**, do mais simples ao mais sofisticado, e **ajuste fino** do melhor (**HistGradientBoosting**):
 
 <div align="center">
@@ -299,7 +300,7 @@ A versão original foi mantida em `Notebooks/` para mostrar a evolução.
 | 6 | Só 2020 e só dados do TSE | Sem comparação nem contexto socioeconômico | Eleições de **2012 a 2024**, indicadores do **IBGE**, dados de **Covid** e análise de **coligações** |
 | 7 | — | `codigo_ibge` trocado em 7 municípios na base | Correção automática comparando os nomes, com teste |
 | 8 | Só análise descritiva | — | **Modelo de abstenção esperada**, com teste fora do tempo, e **modelo multi-eleição** para a próxima eleição |
-| 9 | Caminho `Dataset/` no código | A pasta se chama `Datasets/`: o notebook não rodava | Caminhos corrigidos, funções em `src/` e **16 testes** com `pytest` rodando no **GitHub Actions** |
+| 9 | Caminho `Dataset/` no código | A pasta se chama `Datasets/`: o notebook não rodava | Caminhos corrigidos, funções em `src/` e **17 testes** com `pytest` rodando no **GitHub Actions** |
 
 ## 12. Insights
 
