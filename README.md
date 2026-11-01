@@ -329,6 +329,8 @@ A versão original foi mantida em `Notebooks/` para mostrar a evolução.
 | 10 | Hipóteses só com gráficos | Não diferencia efeito real de acaso | **Testes estatísticos** com tamanho de efeito em todas as 14 hipóteses |
 | 11 | Sem registro das decisões | — | `docs/decisoes_analiticas.md`, fichas dos modelos em JSON e pasta `reports/` |
 
+- 🏆 **Veredito:** v2, a única versão com modelo. O erro da abstenção esperada é de **2,02 p.p.**, contra **4,89 p.p.** de prever sempre a média (**59% menor**), e o modelo multi-eleição erra **2,27 p.p.** na eleição de 2024, que ele não viu.
+
 ## 12. Insights
 
 1. **Conferir o significado das colunas antes de calcular:** nomes errados e códigos trocados levaram a v1 a contar 114 prefeitos a mais e a uma abstenção sem sentido.
